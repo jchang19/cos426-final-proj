@@ -1,6 +1,6 @@
 import * as Dat from 'dat.gui';
 import { Scene, Color } from 'three';
-import { Sheep, Land, Desert} from 'objects';
+import { Sheep, Land, Desert, Bordered_Mountains} from 'objects';
 import { BasicLights } from 'lights';
 
 class SeedScene extends Scene {
@@ -21,12 +21,11 @@ class SeedScene extends Scene {
         // Add meshes to scene
         const lights = new BasicLights();
 
-        const desert = new Desert(this);
-        desert.position.set(0,-100,0);
-        this.add(desert, lights);
+        const b_mountains = new Bordered_Mountains(this);
+        b_mountains.position.set(0,0,0);
+        this.add(b_mountains, lights);
 
         
-
         // Populate GUI
         this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
     }

@@ -17,7 +17,7 @@ const renderer = new WebGLRenderer({ antialias: true });
 
 // Set up camera
 camera.position.set(6,3, -10);
-camera.lookAt(new Vector3(1, 1,1));
+camera.lookAt(new Vector3(1, 100,1));
 
 // Set up renderer, canvas, and minor CSS adjustments
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -31,8 +31,8 @@ document.body.appendChild(canvas);
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 controls.enablePan = false;
-controls.minDistance = 4;
-controls.maxDistance = 16;
+controls.minDistance = 0;
+controls.maxDistance = 1000;
 controls.update();
 
 // Render loop
