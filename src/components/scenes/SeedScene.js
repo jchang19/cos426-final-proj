@@ -22,11 +22,10 @@ class SeedScene extends Scene {
         const lights = new BasicLights();
 
         const desert = new Desert(this);
-        desert.position.set(0,-500,0);
+        desert.position.set(0,-100,0);
         this.add(desert, lights);
 
-        const sheep = new Sheep(this);
-        //this.add(sheep, lights);
+        
 
         // Populate GUI
         this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
