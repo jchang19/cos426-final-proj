@@ -1,17 +1,17 @@
 {
-  "name": "lower-case-dashed-name-of-project",
-  "repository": "REPOSITORY-NAME-AS-IT-APPEARS-IN-GITHUB-URL",
+  "name": "cos426-final-project-sheep-saver",
+  "repository": "COS426-FINAL-PROJ",
   "version": "0.1.0",
-  "title": "PROJECT TITLE HERE",
-  "description": "SHORT DESCRIPTION OF PROJECT HERE. ONE TO TWO SENTENCES MAX",
+  "title": "Sheep Saver",
+  "description": "Sheep Saver is a first person shooter where you shoot wolves to protect your sheep.",
   "keywords": [
     "Princeton",
     "graphics",
     "three.js",
     "COS 426",
     "ivy league",
-    "keyword1",
-    "keyword2",
+    "wild west",
+    "shooter",
     "...",
     "this last entry CANNOT have a comma after it ->"
   ],
