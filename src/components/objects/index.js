@@ -3,3 +3,7 @@ export * from './Land';
 export * from './Sheep';
 export * from './Desert';
 export * from './Bordered_Mountains';
+export * from './S_Mountains';
+export * from './Ball';
+export * from './Gun';
+export * from './Cowboy';

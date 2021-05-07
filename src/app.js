@@ -8,6 +8,7 @@
  */
 import { WebGLRenderer, PerspectiveCamera, Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 import { SeedScene } from 'scenes';
 
 // Initialize core ThreeJS components
@@ -16,8 +17,8 @@ const camera = new PerspectiveCamera();
 const renderer = new WebGLRenderer({ antialias: true });
 
 // Set up camera
-camera.position.set(6,3, -10);
-camera.lookAt(new Vector3(1, 100,1));
+camera.position.set(6,0, 0);
+camera.lookAt(new Vector3(-2.2, -2, 0));
 
 // Set up renderer, canvas, and minor CSS adjustments
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -28,16 +29,84 @@ document.body.style.overflow = 'hidden'; // Fix scrolling
 document.body.appendChild(canvas);
 
 // Set up controls
-const controls = new OrbitControls(camera, canvas);
-controls.enableDamping = true;
-controls.enablePan = false;
-controls.minDistance = 0;
-controls.maxDistance = 1000;
-controls.update();
+// const controls = new OrbitControls(camera, canvas);
+// controls.enableDamping = true;
+// controls.enablePan = false;
+// controls.minDistance = 0;
+// controls.maxDistance = 1000;
+// controls.update();
+const controls = new PointerLockControls(camera, document.body);
+scene.add(controls.getObject());
+var moveForward, moveBackward, moveLeft, moveRight;
+var prevTime = performance.now();
+const onKeyDown = function (event) {
+
+  switch (event.code) {
+
+    case 'ArrowUp':
+    case 'KeyW':
+      moveForward = true;
+      // controls.moveForward(0.5);
+      break;
+
+    case 'ArrowLeft':
+    case 'KeyA':
+      moveLeft = true;
+      break;
+
+    case 'ArrowDown':
+    case 'KeyS':
+      moveBackward = true;
+      break;
+
+    case 'ArrowRight':
+    case 'KeyD':
+      moveRight = true;
+      break;
+
+    
+  }
+};
+
+const onKeyUp = function (event) {
+
+  switch (event.code) {
+
+    case 'ArrowUp':
+    case 'KeyW':
+      moveForward = false;
+      break;
+
+    case 'ArrowLeft':
+    case 'KeyA':
+      moveLeft = false;
+      break;
+
+    case 'ArrowDown':
+    case 'KeyS':
+      moveBackward = false;
+      break;
+
+    case 'ArrowRight':
+    case 'KeyD':
+      moveRight = false;
+      break;
+  }
+};
+document.addEventListener('keydown', onKeyDown);
+document.addEventListener('keyup', onKeyUp);
+// Handle controls movement
+
+
+// controls.connect();
+window.addEventListener('click', function () {
+    controls.lock()
+});
 
 // Render loop
 const onAnimationFrameHandler = (timeStamp) => {
-    controls.update();
+    // controls.update();
+    // controlsHandler();
     renderer.render(scene, camera);
     scene.update && scene.update(timeStamp);
     window.requestAnimationFrame(onAnimationFrameHandler);
@@ -53,3 +122,4 @@ const windowResizeHandler = () => {
 };
 windowResizeHandler();
 window.addEventListener('resize', windowResizeHandler, false);
+
