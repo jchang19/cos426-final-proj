@@ -7,3 +7,4 @@ export * from './S_Mountains';
 export * from './Ball';
 export * from './Gun';
 export * from './Cowboy';
+export * from './Wolf';

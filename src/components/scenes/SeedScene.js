@@ -1,7 +1,8 @@
 import * as Dat from 'dat.gui';
 import { Scene, Color, Vector3 } from 'three';
-import { Sheep, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball} from 'objects';
+import { Sheep, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf} from 'objects';
 import { BasicLights } from 'lights';
+import { globals } from '../../global';
 
 class SeedScene extends Scene {
     constructor() {
@@ -50,6 +51,17 @@ class SeedScene extends Scene {
         ball.scale.multiplyScalar(0.00002);
         this.add(ball, lights);
 
+        // Add sheep and wolves to scene
+        const sheep = new Sheep(this);
+        const wolf = new Wolf(this);
+        this.add(sheep, wolf);
+
+        // initialize sheep and wolf global arrays
+        globals.wolves = [];
+        globals.wolves.push(wolf)
+
+        globals.sheeps = [];
+        globals.sheeps.push(sheep)
 
         //this.state.prevMapObject = s_mountains;
         //this.state.prevLightsObject = lights;

@@ -109,6 +109,14 @@ const onAnimationFrameHandler = (timeStamp) => {
     // controlsHandler();
     renderer.render(scene, camera);
     scene.update && scene.update(timeStamp);
+
+    console.log(scene.children)
+    // MOVE SHEEP
+    scene.children[5].move();
+
+    // MOVE WOLVES
+    scene.children[6].move()
+
     window.requestAnimationFrame(onAnimationFrameHandler);
 };
 window.requestAnimationFrame(onAnimationFrameHandler);
