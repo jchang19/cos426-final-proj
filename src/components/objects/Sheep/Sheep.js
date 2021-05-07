@@ -14,7 +14,8 @@ class Sheep extends Group {
         loader.load(MODEL, (gltf) => {
     
             console.log(gltf)
-            gltf.scene.children[0].scale.multiplyScalar(0.008)
+            gltf.scene.children[0].scale.multiplyScalar(0.0008)
+            gltf.scene.children[0].position.y -= 2
             this.add(gltf.scene);
         });
     }

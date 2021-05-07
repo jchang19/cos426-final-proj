@@ -15,7 +15,7 @@ class Wolf extends Group {
         loader.load(MODEL, (gltf) => {
     
             // console.log(gltf)
-            gltf.scene.children[0].scale.multiplyScalar(0.7)
+            gltf.scene.children[0].scale.multiplyScalar(0.1)
             this.add(gltf.scene);
         });
 
