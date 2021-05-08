@@ -11,6 +11,11 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 import { SeedScene } from 'scenes';
 
+// CONSTANTS
+const ACCELERATION = 0.01;
+const DECELERATION = 0.02;
+const MAXSPEED = 0.1;
+
 // Initialize core ThreeJS components
 const scene = new SeedScene();
 const camera = new PerspectiveCamera();
@@ -29,16 +34,17 @@ document.body.style.overflow = 'hidden'; // Fix scrolling
 document.body.appendChild(canvas);
 
 // Set up controls
-// const controls = new OrbitControls(camera, canvas);
-// controls.enableDamping = true;
-// controls.enablePan = false;
-// controls.minDistance = 0;
-// controls.maxDistance = 1000;
-// controls.update();
+
 const controls = new PointerLockControls(camera, document.body);
 scene.add(controls.getObject());
-var moveForward, moveBackward, moveLeft, moveRight;
-var prevTime = performance.now();
+var moveForward = false; 
+var moveBackward = false;
+var moveLeft = false;
+var moveRight = false;
+var vFront = 0.0;
+var vLeft = 0.0;
+var vBack = 0.0;
+var vRight = 0.0;
 const onKeyDown = function (event) {
 
   switch (event.code) {
@@ -46,7 +52,6 @@ const onKeyDown = function (event) {
     case 'ArrowUp':
     case 'KeyW':
       moveForward = true;
-      // controls.moveForward(0.5);
       break;
 
     case 'ArrowLeft':
@@ -64,7 +69,6 @@ const onKeyDown = function (event) {
       moveRight = true;
       break;
 
-    
   }
 };
 
@@ -91,12 +95,46 @@ const onKeyUp = function (event) {
     case 'KeyD':
       moveRight = false;
       break;
+
   }
 };
 document.addEventListener('keydown', onKeyDown);
 document.addEventListener('keyup', onKeyUp);
+const clampSpeed = (vel) => {
+    var speed;
+    speed = Math.max(0, vel);
+    return Math.min(MAXSPEED, speed);
+}
 // Handle controls movement
+const controlsHandler = () => {
+    // front back
+    if (moveForward) {
+        vFront = clampSpeed(vFront + ACCELERATION);
+    } else {
+        vFront = clampSpeed(vFront - DECELERATION);
+        
+    }
+    if (moveLeft) {
+        vLeft = clampSpeed(vLeft + ACCELERATION);
+    } else {
+        vLeft = clampSpeed(vLeft - DECELERATION);
+    }
+    // right left
+    if (moveBackward) {
+        vBack = clampSpeed(vBack + ACCELERATION);
+    } else {
+        vBack = clampSpeed(vBack - DECELERATION);
+    }
+    if (moveRight) {
+        vRight = clampSpeed(vRight + ACCELERATION);
+    } else {
+        vRight = clampSpeed(vRight - DECELERATION);
+    }
 
+    // update position
+    controls.moveForward(vFront - vBack);
+    controls.moveRight(vRight - vLeft);
+}
 
 // controls.connect();
 window.addEventListener('click', function () {
@@ -106,11 +144,11 @@ window.addEventListener('click', function () {
 // Render loop
 const onAnimationFrameHandler = (timeStamp) => {
     // controls.update();
-    // controlsHandler();
+    controlsHandler();
     renderer.render(scene, camera);
     scene.update && scene.update(timeStamp);
 
-    console.log(scene.children)
+    // console.log(scene.children)
     // MOVE SHEEP
     scene.children[5].move();
 
