@@ -11,6 +11,11 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 import { SeedScene } from 'scenes';
 
+var bins = require.context("../", true, /.*\.bin/);
+var pngs = require.context("../", true, /.*\.png/);
+console.log(bins);
+console.log(pngs);
+
 // CONSTANTS
 const ACCELERATION = 0.01;
 const DECELERATION = 0.02;

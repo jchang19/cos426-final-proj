@@ -723,10 +723,10 @@
   ],
   "images": [
     {
-      "uri": "textures/Material.003_baseColor.png"
+      "uri": "/Material.003_baseColor.png"
     },
     {
-      "uri": "textures/Material.003_metallicRoughness.png"
+      "uri": "/Material.003_metallicRoughness.png"
     }
   ],
   "materials": [
