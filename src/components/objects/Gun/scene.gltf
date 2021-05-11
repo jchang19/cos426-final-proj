@@ -129,13 +129,13 @@
   ],
   "images": [
     {
-      "uri": "textures/lambert1_baseColor.png"
+      "uri": "/lambert1_baseColor.png"
     },
     {
-      "uri": "textures/lambert1_metallicRoughness.png"
+      "uri": "/lambert1_metallicRoughness.png"
     },
     {
-      "uri": "textures/lambert1_emissive.png"
+      "uri": "/lambert1_emissive.png"
     }
   ],
   "materials": [
