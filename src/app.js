@@ -10,6 +10,7 @@ import { WebGLRenderer, PerspectiveCamera, Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 import { SeedScene } from 'scenes';
+import { globals } from './global';
 
 var bins = require.context("../", true, /.*\.bin/);
 var pngs = require.context("../", true, /.*\.png/);
