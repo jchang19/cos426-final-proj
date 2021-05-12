@@ -6,15 +6,19 @@
  * handles window resizes.
  *
  */
-import { WebGLRenderer, PerspectiveCamera, Vector3 } from 'three';
+import { WebGLRenderer, PerspectiveCamera, Vector3, Clock } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 import { SeedScene } from 'scenes';
+import { globals } from './global';
 
 var bins = require.context("../", true, /.*\.bin/);
 var pngs = require.context("../", true, /.*\.png/);
 console.log(bins);
 console.log(pngs);
+
+// Clock
+var clock = new Clock();
 
 // CONSTANTS
 const ACCELERATION = 0.01;
@@ -148,6 +152,7 @@ window.addEventListener('click', function () {
 
 // Render loop
 const onAnimationFrameHandler = (timeStamp) => {
+    
     // controls.update();
     controlsHandler();
     renderer.render(scene, camera);
@@ -158,7 +163,13 @@ const onAnimationFrameHandler = (timeStamp) => {
     scene.children[5].move();
 
     // MOVE WOLVES
-    scene.children[6].move()
+    scene.children[6].move();
+
+    // Animate Animals
+    var delta = clock.getDelta();
+    globals.mixers.forEach((mixer) => {
+      if(mixer) mixer.update(delta);
+    });
 
     window.requestAnimationFrame(onAnimationFrameHandler);
 };

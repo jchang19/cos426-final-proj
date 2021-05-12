@@ -1,6 +1,6 @@
 import * as Dat from 'dat.gui';
 import { Scene, Color, Vector3 } from 'three';
-import { Sheep, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf} from 'objects';
+import { Sheep, Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf, Wolf1} from 'objects';
 import { BasicLights } from 'lights';
 import { globals } from '../../global';
 
@@ -14,10 +14,6 @@ class SeedScene extends Scene {
             gui: new Dat.GUI(), // Create GUI for scene
             rotationSpeed: 0,
             updateList: [],
-            //map:  "1",
-            //prevMapId: "1",
-            //prevMapObject: null,
-            //prevLightsObject: null,
         };
 
         // Set background to a nice color
@@ -52,8 +48,10 @@ class SeedScene extends Scene {
         this.add(ball, lights);
 
         // Add sheep and wolves to scene
-        const sheep = new Sheep(this);
-        const wolf = new Wolf(this);
+        const sheep = new Sheep1(this);
+        const wolf = new Wolf1(this);
+        console.log(wolf);
+        wolf.scale.multiplyScalar(0.75);
         this.add(sheep, wolf);
 
         // initialize sheep and wolf global arrays
@@ -70,6 +68,7 @@ class SeedScene extends Scene {
         this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
         //this.state.gui.add(this.state, 'map', {map1: '1', map2: '2', map3: '3',map4: '4'}).setValue('1');
         
+
     }
 
     addToUpdateList(object) {
@@ -79,19 +78,6 @@ class SeedScene extends Scene {
     update(timeStamp) {
         const {rotationSpeed, updateList} = this.state;
         this.rotation.y = (rotationSpeed * timeStamp) / 10000;
-                
-        // if the user has not selected a new map
-        /*if (map != prevMapId) {
-            this.remove(prevLightsObject);
-            this.remove(prevMapObject);  // remove the previous map
-            var lights = new BasicLights();
-            var newMap = this.mapObjectFromId(map);  // create the new map
-            this.add(newMap, lights); // add the new map to the scene
-
-            this.state.prevMapId = map; // update state tracker variables respectively
-            this.state.prevMapObject = newMap;
-            this.state.prevLightsObject = lights;
-        }*/
             
         // Call update for each object in the updateList
         for (const obj of updateList) {
