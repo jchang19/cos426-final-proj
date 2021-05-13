@@ -1,5 +1,5 @@
 import * as Dat from 'dat.gui';
-import { Scene, Color, Vector3 } from 'three';
+import { Scene, Color, Vector3, Box3, Box3Helper } from 'three';
 import { Sheep, Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf, Wolf1} from 'objects';
 import { BasicLights } from 'lights';
 import { globals } from '../../global';
@@ -28,24 +28,23 @@ class SeedScene extends Scene {
         this.add(s_mountains, lights);
 
         const gun = new Gun(this);
-        gun.position.set(-3,-3.4,0.3);
+        gun.position.set(15,-7,6.7);
         gun.rotation.z = -1 * Math.PI/10;
-        //gun.rotation.y = -1 * Math.PI/16;
+        gun.rotation.y = -1 * Math.PI/7;
         gun.scale.multiplyScalar(0.0005);
         this.add(gun, lights);
-
-
-        const cowboy = new Cowboy(this);
+        globals.gun = gun;
+        /*const cowboy = new Cowboy(this);
         cowboy.position.set(-2.2,-4,0);
         cowboy.scale.multiplyScalar(0.003);
         cowboy.rotation.y = -1 * Math.PI/2;
-        this.add(cowboy, lights);
+        this.add(cowboy, lights); */
 
 
-        const ball = new Ball(this);
+        /*const ball = new Ball(this);
         ball.position.set(-3.5,-3.3,0.3);
         ball.scale.multiplyScalar(0.00002);
-        this.add(ball, lights);
+        this.add(ball, lights); */
 
         // Add sheep and wolves to scene
         const sheep = new Sheep1(this);
@@ -56,10 +55,10 @@ class SeedScene extends Scene {
 
         // initialize sheep and wolf global arrays
         globals.wolves = [];
-        globals.wolves.push(wolf)
+        globals.wolves.push(wolf);
 
         globals.sheeps = [];
-        globals.sheeps.push(sheep)
+        globals.sheeps.push(sheep);
 
         //this.state.prevMapObject = s_mountains;
         //this.state.prevLightsObject = lights;
@@ -68,7 +67,12 @@ class SeedScene extends Scene {
         this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
         //this.state.gui.add(this.state, 'map', {map1: '1', map2: '2', map3: '3',map4: '4'}).setValue('1');
         
-
+        // add box to scene 
+        var min = new Vector3(1,-7.0,3);
+        var max = new Vector3(28, -3, 22);
+        const box = new Box3(min, max);
+        const helper = new Box3Helper( box, 0xFF0000 );
+        this.add(helper, lights);
     }
 
     addToUpdateList(object) {

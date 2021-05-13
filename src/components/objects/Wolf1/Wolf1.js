@@ -22,12 +22,16 @@ class Wolf1 extends Group {
             globals.mixers.push(mixer);
         });
 
-        let x = Math.random() * 20 - 10
-        let z = Math.random() * 20 - 10
+        var max_x = 23;
+        var min_x = 10;
+        var max_z = 22;
+        var min_z = 3;
+        let x = Math.random() * (max_x - min_x) + min_x;
+        let z = Math.random() * (max_z - min_z) + min_z;
 
-        this.position.x = x
-        this.position.z = z
-        this.position.y -= 2.5
+        this.position.x = x;
+        this.position.z = z;
+        this.position.y = -7;
     }
 
     move() {
@@ -40,7 +44,7 @@ class Wolf1 extends Group {
         this.rotation.y = angle
 
         this.position.add(direction.normalize().multiplyScalar(0.01))
-        this.position.y =  -2.5
+        this.position.y =  -8.5
     }
 }
 

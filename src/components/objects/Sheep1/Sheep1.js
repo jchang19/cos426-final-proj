@@ -20,7 +20,7 @@ class Sheep1 extends Group {
 
 
             gltf.scene.children[0].scale.multiplyScalar(0.25)
-            gltf.scene.children[0].position.y -= 2
+            gltf.scene.children[0].position.y = -7;
             this.add(gltf.scene);
             globals.mixers.push(mixer);
         });

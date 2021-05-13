@@ -31,7 +31,7 @@ const camera = new PerspectiveCamera();
 const renderer = new WebGLRenderer({ antialias: true });
 
 // Set up camera
-camera.position.set(6,0, 0);
+camera.position.set(15.7,-5, 7.5);
 camera.lookAt(new Vector3(-2.2, -2, 0));
 
 // Set up renderer, canvas, and minor CSS adjustments
@@ -42,8 +42,11 @@ document.body.style.margin = 0; // Removes margin around page
 document.body.style.overflow = 'hidden'; // Fix scrolling
 document.body.appendChild(canvas);
 
-// Set up controls
 
+//camera.add(globals.gun);
+//globals.gun.position.set(17,-7,8);
+
+// Set up controls
 const controls = new PointerLockControls(camera, document.body);
 scene.add(controls.getObject());
 var moveForward = false; 
@@ -54,6 +57,7 @@ var vFront = 0.0;
 var vLeft = 0.0;
 var vBack = 0.0;
 var vRight = 0.0;
+
 const onKeyDown = function (event) {
 
   switch (event.code) {
@@ -143,6 +147,10 @@ const controlsHandler = () => {
     // update position
     controls.moveForward(vFront - vBack);
     controls.moveRight(vRight - vLeft);
+    var x = camera.position.x -0.7;
+    var y = camera.position.y;
+    var z = camera.position.z - 0.8; 
+    globals.gun.position.set(x,y,z);
 }
 
 // controls.connect();
@@ -160,10 +168,10 @@ const onAnimationFrameHandler = (timeStamp) => {
 
     // console.log(scene.children)
     // MOVE SHEEP
-    scene.children[5].move();
+    scene.children[2].move();
 
     // MOVE WOLVES
-    scene.children[6].move();
+    scene.children[3].move();
 
     // Animate Animals
     var delta = clock.getDelta();
@@ -184,4 +192,3 @@ const windowResizeHandler = () => {
 };
 windowResizeHandler();
 window.addEventListener('resize', windowResizeHandler, false);
-
