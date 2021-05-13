@@ -1,4 +1,4 @@
 export default{
     wolves: null,
-    sheeps: null,
+    sheep: null,
 };

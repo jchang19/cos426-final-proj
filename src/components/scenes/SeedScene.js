@@ -1,5 +1,5 @@
 import * as Dat from 'dat.gui';
-import { Scene, Color, Vector3 } from 'three';
+import { Scene, Color, Vector3, Box3Helper } from 'three';
 import { Sheep, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf} from 'objects';
 import { BasicLights } from 'lights';
 import { globals } from '../../global';
@@ -56,12 +56,18 @@ class SeedScene extends Scene {
         const wolf = new Wolf(this);
         this.add(sheep, wolf);
 
+        // Hitbox visualizer
+        // const helper = new Box3Helper( sheep.hitbox, 0xffff00 );
+        // this.add( helper );
+
+        // const helper2 = new Box3Helper( wolf.hitbox, 0xffff00 );
+        // this.add( helper2 );
+
         // initialize sheep and wolf global arrays
         globals.wolves = [];
         globals.wolves.push(wolf)
 
-        globals.sheeps = [];
-        globals.sheeps.push(sheep)
+        globals.sheep = sheep;
 
         //this.state.prevMapObject = s_mountains;
         //this.state.prevLightsObject = lights;
