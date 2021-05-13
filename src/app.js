@@ -41,6 +41,20 @@ document.body.appendChild(canvas);
 // Set up controls
 
 const controls = new PointerLockControls(camera, document.body);
+controls.addEventListener('lock', function () {
+
+  instructions.style.display = 'none';
+  blocker.style.display = 'none';
+
+});
+
+controls.addEventListener('unlock', function () {
+
+  blocker.style.display = 'block';
+  instructions.style.display = '';
+
+});
+
 scene.add(controls.getObject());
 var moveForward = false; 
 var moveBackward = false;
@@ -73,6 +87,9 @@ const onKeyDown = function (event) {
     case 'KeyD':
       moveRight = true;
       break;
+    
+    case 'Space':
+      onClick();
 
   }
 };
@@ -142,9 +159,19 @@ const controlsHandler = () => {
 }
 
 // controls.connect();
-window.addEventListener('click', function () {
-    controls.lock()
+document.addEventListener('click', function () {
+    controls.lock();
 });
+
+// shoot event
+const onClick = function (event) {
+    console.log('shoot');
+    scene.shootBullet(controls);
+}
+document.addEventListener('mousedown', onClick);
+// controls.addEventListener('lock', function () {
+//     document.addEventListener('mousedown', onClick);
+// });
 
 // Render loop
 const onAnimationFrameHandler = (timeStamp) => {
