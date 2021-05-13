@@ -41,6 +41,20 @@ document.body.appendChild(canvas);
 // Set up controls
 
 const controls = new PointerLockControls(camera, document.body);
+controls.addEventListener('lock', function () {
+
+  instructions.style.display = 'none';
+  blocker.style.display = 'none';
+
+});
+
+controls.addEventListener('unlock', function () {
+
+  blocker.style.display = 'block';
+  instructions.style.display = '';
+
+});
+
 scene.add(controls.getObject());
 var moveForward = false; 
 var moveBackward = false;
@@ -142,7 +156,7 @@ const controlsHandler = () => {
 }
 
 // controls.connect();
-window.addEventListener('click', function () {
+document.addEventListener('click', function () {
     controls.lock()
 });
 
