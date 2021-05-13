@@ -1,0 +1,1 @@
+export { default as Wolf1 } from './Wolf1.js';
