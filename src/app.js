@@ -10,6 +10,8 @@ import { WebGLRenderer, PerspectiveCamera, Vector3 } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 import { SeedScene } from 'scenes';
+import { globals } from './global';
+import Wolf from './components/objects/Wolf/wolf';
 
 var bins = require.context("../", true, /.*\.bin/);
 var pngs = require.context("../", true, /.*\.png/);
@@ -180,13 +182,33 @@ const onAnimationFrameHandler = (timeStamp) => {
     renderer.render(scene, camera);
     scene.update && scene.update(timeStamp);
 
-    // console.log(scene.children)
+
+    // console.log(timeStamp)
+    // Spawn wolf every 5 seconds
+    // if (timeStamp % 5000 === 0){
+    //   var newwolf = new Wolf();
+    //   scene.add(newwolf);
+    //   globals.wolves.push(newwolf)
+    // }
+    
     // MOVE SHEEP
-    scene.children[5].move();
+    globals.sheep.move();
 
     // MOVE WOLVES
-    scene.children[6].move()
-
+    if (globals.sheep.health > 0){
+      for (let i = 0; i < globals.wolves.length; i ++){
+        globals.wolves[i].move();
+  
+        if (globals.wolves[i].hitbox.clone().intersectsBox(globals.sheep.hitbox)){
+          globals.sheep.takedamage();
+        }
+  
+        if (globals.sheep.health <= 0){
+          scene.remove(globals.sheep)
+        }
+      }
+    }
+    
     window.requestAnimationFrame(onAnimationFrameHandler);
 };
 window.requestAnimationFrame(onAnimationFrameHandler);
