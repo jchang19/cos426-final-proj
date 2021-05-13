@@ -87,6 +87,9 @@ const onKeyDown = function (event) {
     case 'KeyD':
       moveRight = true;
       break;
+    
+    case 'Space':
+      onClick();
 
   }
 };
@@ -157,8 +160,18 @@ const controlsHandler = () => {
 
 // controls.connect();
 document.addEventListener('click', function () {
-    controls.lock()
+    controls.lock();
 });
+
+// shoot event
+const onClick = function (event) {
+    console.log('shoot');
+    scene.shootBullet(controls);
+}
+document.addEventListener('mousedown', onClick);
+// controls.addEventListener('lock', function () {
+//     document.addEventListener('mousedown', onClick);
+// });
 
 // Render loop
 const onAnimationFrameHandler = (timeStamp) => {
