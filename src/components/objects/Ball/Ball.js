@@ -10,6 +10,7 @@ class Ball extends Group {
         const loader = new GLTFLoader();
 
         this.name = 'ball';
+        this.direction;
         
         loader.load(MODEL, (gltf) => {
             this.add(gltf.scene);
