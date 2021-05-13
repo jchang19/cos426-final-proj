@@ -35,6 +35,7 @@ class Wolf1 extends Group {
     }
 
     move() {
+        console.log("MOVE1")
         var direction = globals.sheeps[0].position.clone().sub(this.position).normalize();
         let angle = new Vector3(0, 0, 1).angleTo(direction);
         if (globals.sheeps[0].position.x - this.position.x < 0) {
@@ -45,6 +46,11 @@ class Wolf1 extends Group {
 
         this.position.add(direction.normalize().multiplyScalar(0.01))
         this.position.y =  -8.5
+
+        // Update hitbox
+        // this.hitbox.setFromCenterAndSize(this.position, this.scale.clone().multiplyScalar(0.5))
+        // this.hitbox.min.add(new Vector3(0, 1, 0).multiplyScalar(0.3))
+        // this.hitbox.max.add(new Vector3(0, 1, 0).multiplyScalar(0.3))
     }
 }
 
