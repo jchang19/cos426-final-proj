@@ -48,6 +48,20 @@ document.body.appendChild(canvas);
 
 // Set up controls
 const controls = new PointerLockControls(camera, document.body);
+controls.addEventListener('lock', function () {
+
+  instructions.style.display = 'none';
+  blocker.style.display = 'none';
+
+});
+
+controls.addEventListener('unlock', function () {
+
+  blocker.style.display = 'block';
+  instructions.style.display = '';
+
+});
+
 scene.add(controls.getObject());
 var moveForward = false; 
 var moveBackward = false;
@@ -81,6 +95,9 @@ const onKeyDown = function (event) {
     case 'KeyD':
       moveRight = true;
       break;
+    
+    case 'Space':
+      onClick();
 
   }
 };
@@ -154,9 +171,19 @@ const controlsHandler = () => {
 }
 
 // controls.connect();
-window.addEventListener('click', function () {
-    controls.lock()
+document.addEventListener('click', function () {
+    controls.lock();
 });
+
+// shoot event
+const onClick = function (event) {
+    console.log('shoot');
+    scene.shootBullet(controls);
+}
+document.addEventListener('mousedown', onClick);
+// controls.addEventListener('lock', function () {
+//     document.addEventListener('mousedown', onClick);
+// });
 
 // Render loop
 const onAnimationFrameHandler = (timeStamp) => {
@@ -166,12 +193,17 @@ const onAnimationFrameHandler = (timeStamp) => {
     renderer.render(scene, camera);
     scene.update && scene.update(timeStamp);
 
-    // console.log(scene.children)
-    // MOVE SHEEP
-    scene.children[2].move();
 
-    // MOVE WOLVES
-    scene.children[3].move();
+    // console.log(timeStamp)
+    // Spawn wolf every 5 seconds
+    // if (timeStamp % 5000 === 0){
+    //   var newwolf = new Wolf();
+    //   scene.add(newwolf);
+    //   globals.wolves.push(newwolf)
+    // }
+    
+    // MOVE SHEEP
+
 
     // Animate Animals
     var delta = clock.getDelta();
@@ -179,6 +211,23 @@ const onAnimationFrameHandler = (timeStamp) => {
       if(mixer) mixer.update(delta);
     });
 
+    globals.sheep.move();
+
+    // MOVE WOLVES
+    if (globals.sheep.health > 0){
+      for (let i = 0; i < globals.wolves.length; i ++){
+        globals.wolves[i].move();
+  
+        if (globals.wolves[i].hitbox.clone().intersectsBox(globals.sheep.hitbox)){
+          globals.sheep.takedamage();
+        }
+  
+        if (globals.sheep.health <= 0){
+          scene.remove(globals.sheep)
+        }
+      }
+    }
+    
     window.requestAnimationFrame(onAnimationFrameHandler);
 };
 window.requestAnimationFrame(onAnimationFrameHandler);

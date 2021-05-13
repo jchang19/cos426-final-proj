@@ -1,4 +1,4 @@
-import { Group, Vector3 } from 'three';
+import { Group, Vector3, Box3} from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import MODEL from './wolf.gltf';
 import { globals } from '../../../global';
@@ -11,6 +11,7 @@ class Wolf extends Group {
         const loader = new GLTFLoader();
 
         this.name = 'wolf';
+        this.hitbox = new Box3()
 
         loader.load(MODEL, (gltf) => {
     
@@ -28,9 +29,9 @@ class Wolf extends Group {
     }
 
     move() {
-        var direction = globals.sheeps[0].position.clone().sub(this.position).normalize();
+        var direction = globals.sheep.position.clone().sub(this.position).normalize();
         let angle = new Vector3(0, 0, 1).angleTo(direction);
-        if (globals.sheeps[0].position.x - this.position.x < 0) {
+        if (globals.sheep.position.x - this.position.x < 0) {
             angle = Math.PI * 2 - angle;
         }
 
@@ -38,6 +39,11 @@ class Wolf extends Group {
 
         this.position.add(direction.normalize().multiplyScalar(0.01))
         this.position.y =  -2.5
+
+        // Update hitbox
+        this.hitbox.setFromCenterAndSize(this.position, this.scale.clone().multiplyScalar(0.5))
+        this.hitbox.min.add(new Vector3(0, 1, 0).multiplyScalar(0.3))
+        this.hitbox.max.add(new Vector3(0, 1, 0).multiplyScalar(0.3))
     }
 }
 

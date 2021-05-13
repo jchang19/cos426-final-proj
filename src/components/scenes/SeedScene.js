@@ -1,8 +1,11 @@
 import * as Dat from 'dat.gui';
 import { Scene, Color, Vector3, Box3, Box3Helper } from 'three';
 import { Sheep, Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf, Wolf1} from 'objects';
+import * as THREE from 'three';
 import { BasicLights } from 'lights';
 import { globals } from '../../global';
+
+const BULLETSPEED = 0.1;
 
 class SeedScene extends Scene {
     constructor() {
@@ -53,18 +56,28 @@ class SeedScene extends Scene {
         wolf.scale.multiplyScalar(0.75);
         this.add(sheep, wolf);
 
+        // Hitbox visualizer
+        // const helper = new Box3Helper( sheep.hitbox, 0xffff00 );
+        // this.add( helper );
+
+        // const helper2 = new Box3Helper( wolf.hitbox, 0xffff00 );
+        // this.add( helper2 );
+
         // initialize sheep and wolf global arrays
         globals.wolves = [];
         globals.wolves.push(wolf);
 
-        globals.sheeps = [];
-        globals.sheeps.push(sheep);
+
+        globals.sheep = sheep;
+
+        // initialize bullets array
+        globals.bullets = [];
 
         //this.state.prevMapObject = s_mountains;
         //this.state.prevLightsObject = lights;
 
         // Populate GUI
-        this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
+        // this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
         //this.state.gui.add(this.state, 'map', {map1: '1', map2: '2', map3: '3',map4: '4'}).setValue('1');
         
         // add box to scene 
@@ -75,6 +88,24 @@ class SeedScene extends Scene {
         this.add(helper, lights);
     }
 
+    shootBullet(controls) {
+        var camera = controls.getObject();
+        const bullet = new THREE.Mesh(new THREE.SphereGeometry(0.1, 32, 32), new THREE.MeshBasicMaterial({
+            color: "aqua"
+        })); 
+        // camera.add(bullet);
+        bullet.position.copy(camera.getWorldPosition(new Vector3()));
+        bullet.quaternion.copy(camera.quaternion);
+        bullet.translateX(-0.5);
+        bullet.direction = controls.getDirection(new Vector3()).normalize();
+
+        globals.bullets.push(bullet);
+        this.add(bullet);
+
+        
+    }
+
+
     addToUpdateList(object) {
         this.state.updateList.push(object);
     }
@@ -82,6 +113,11 @@ class SeedScene extends Scene {
     update(timeStamp) {
         const {rotationSpeed, updateList} = this.state;
         this.rotation.y = (rotationSpeed * timeStamp) / 10000;
+
+        globals.bullets.forEach(b => {
+            b.position.addScaledVector(b.direction, BULLETSPEED);
+        });
+
             
         // Call update for each object in the updateList
         for (const obj of updateList) {

@@ -1,6 +1,7 @@
 export default{
     wolves: null,
-    sheeps: null,
     mixers: [],
     gun: null,
+    sheep: null,
+    bullets: null,
 };
