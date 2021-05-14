@@ -4,4 +4,7 @@ export default{
     gun: null,
     sheep: null,
     bullets: null,
+    phoenix: null,
+    phoenix_flag: null,
+    birds: null,
 };

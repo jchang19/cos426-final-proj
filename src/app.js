@@ -208,8 +208,14 @@ const onAnimationFrameHandler = (timeStamp) => {
       if(mixer) mixer.update(delta);
     });
 
-    globals.sheep.move();
+    // Move Phoenix bird
+    //globals.phoenix.move()
 
+    // Move regular birds
+    globals.birds.move()
+
+    // Move sheep
+    globals.sheep.move();
 
     // Temp code to move wolves
     globals.wolves.forEach((wolf) => { 

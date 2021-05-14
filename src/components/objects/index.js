@@ -8,3 +8,5 @@ export * from './Gun';
 export * from './Cowboy';
 export * from './Wolf1';
 export * from './Sheep1';
+export * from './Phoenix';
+export * from './Birds';

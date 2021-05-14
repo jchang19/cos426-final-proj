@@ -1,0 +1,1 @@
+export { default as Birds } from './Birds.js';

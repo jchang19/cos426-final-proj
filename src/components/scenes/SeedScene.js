@@ -1,6 +1,6 @@
 import * as Dat from 'dat.gui';
 import { Scene, Color, Vector3, Box3, Box3Helper } from 'three';
-import { Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf1} from 'objects';
+import { Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf1, Phoenix, Birds} from 'objects';
 import * as THREE from 'three';
 import { BasicLights } from 'lights';
 import { globals } from '../../global';
@@ -45,11 +45,22 @@ class SeedScene extends Scene {
         cowboy.rotation.y = -1 * Math.PI/2;
         this.add(cowboy, lights); */
 
+        // Add Phoenix
+        const phoenix = new Phoenix(this);
+        phoenix.scale.multiplyScalar(0.1);
+        //phoenix.rotation.y = Math.PI/2;
+        phoenix.position.set(30, 0,500);
+        //this.add(phoenix, lights);
+        globals.phoenix = phoenix;
+        globals.phoenix_flag = true;
 
-        /*const ball = new Ball(this);
-        ball.position.set(-3.5,-3.3,0.3);
-        ball.scale.multiplyScalar(0.00002);
-        this.add(ball, lights); */
+        // Add Birds
+        const birds = new Birds(this);
+        birds.scale.multiplyScalar(25);
+        //birds.rotation.y = -1 * Math.PI/2;
+        birds.position.set(300, 0,500);
+        this.add(birds, lights);
+        globals.birds = birds;
 
         // Add sheep and wolves to scene
         const sheep = new Sheep1(this);
