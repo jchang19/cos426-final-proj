@@ -127,7 +127,19 @@ class SeedScene extends Scene {
         this.rotation.y = (rotationSpeed * timeStamp) / 10000;
 
         globals.bullets.forEach(b => {
-            b.position.addScaledVector(b.direction, BULLETSPEED);
+            b.position.addScaledVector(b.direction, BULLETSPEED * 2);
+
+            globals.wolves.forEach(wolf => {
+                if (wolf.hitbox.containsPoint(b.position)){
+                    wolf.takeDamage()
+
+                    if (wolf.health <= 0){
+                        this.remove(wolf)
+                        const index = globals.wolves.indexOf(wolf);
+                        globals.wolves.splice(index, 1);
+                    }
+                }
+            })
         });
 
             
