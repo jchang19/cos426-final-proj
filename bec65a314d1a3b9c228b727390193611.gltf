@@ -150,10 +150,10 @@
   ],
   "images": [
     {
-      "uri": "textures/Cactus_1_Material_specularGlossiness.png"
+      "uri": "Cactus_1_Material_specularGlossiness.png"
     },
     {
-      "uri": "textures/Cactus_1_Material_diffuse.png"
+      "uri": "Cactus_1_Material_diffuse.png"
     }
   ],
   "materials": [

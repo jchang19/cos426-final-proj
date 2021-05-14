@@ -889,76 +889,76 @@
   ],
   "images": [
     {
-      "uri": "textures/fabric_baseColor.jpeg"
+      "uri": "fabric_baseColor.jpeg"
     },
     {
-      "uri": "textures/fabric_metallicRoughness.png"
+      "uri": "fabric_metallicRoughness.png"
     },
     {
-      "uri": "textures/fabric_normal.jpeg"
+      "uri": "fabric_normal.jpeg"
     },
     {
-      "uri": "textures/wood_baseColor.jpeg"
+      "uri": "wood_baseColor.jpeg"
     },
     {
-      "uri": "textures/wood_metallicRoughness.png"
+      "uri": "wood_metallicRoughness.png"
     },
     {
-      "uri": "textures/wood_normal.jpeg"
+      "uri": "wood_normal.jpeg"
     },
     {
-      "uri": "textures/roof_baseColor.jpeg"
+      "uri": "roof_baseColor.jpeg"
     },
     {
-      "uri": "textures/roof_metallicRoughness.png"
+      "uri": "roof_metallicRoughness.png"
     },
     {
-      "uri": "textures/roof_normal.jpeg"
+      "uri": "roof_normal.jpeg"
     },
     {
-      "uri": "textures/mill_wall_baseColor.jpeg"
+      "uri": "mill_wall_baseColor.jpeg"
     },
     {
-      "uri": "textures/mill_wall_metallicRoughness.png"
+      "uri": "mill_wall_metallicRoughness.png"
     },
     {
-      "uri": "textures/mill_wall_normal.jpeg"
+      "uri": "mill_wall_normal.jpeg"
     },
     {
-      "uri": "textures/base_baseColor.jpeg"
+      "uri": "base_baseColor.jpeg"
     },
     {
-      "uri": "textures/base_metallicRoughness.png"
+      "uri": "base_metallicRoughness.png"
     },
     {
-      "uri": "textures/base_normal.jpeg"
+      "uri": "base_normal.jpeg"
     },
     {
-      "uri": "textures/bricks_baseColor.jpeg"
+      "uri": "bricks_baseColor.jpeg"
     },
     {
-      "uri": "textures/bricks_metallicRoughness.png"
+      "uri": "bricks_metallicRoughness.png"
     },
     {
-      "uri": "textures/bricks_normal.jpeg"
+      "uri": "bricks_normal.jpeg"
     },
     {
-      "uri": "textures/door_baseColor.jpeg"
+      "uri": "door_baseColor.jpeg"
     },
     {
-      "uri": "textures/door_metallicRoughness.png"
+      "uri": "door_metallicRoughness.png"
     },
     {
-      "uri": "textures/door_normal.jpeg"
+      "uri": "door_normal.jpeg"
     },
     {
-      "uri": "textures/fence_baseColor.jpeg"
+      "uri": "fence_baseColor.jpeg"
     },
     {
-      "uri": "textures/fence_metallicRoughness.png"
+      "uri": "fence_metallicRoughness.png"
     },
     {
-      "uri": "textures/fence_normal.jpeg"
+      "uri": "fence_normal.jpeg"
     }
   ],
   "materials": [
