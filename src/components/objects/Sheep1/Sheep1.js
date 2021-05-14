@@ -12,7 +12,7 @@ class Sheep1 extends Group {
 
         this.name = 'sheep1';
         this.hitbox = new Box3()
-        this.health = 100;
+        this.health = 1000;
 
         loader.load(MODEL, (gltf) => {
             
@@ -71,7 +71,7 @@ class Sheep1 extends Group {
     }
 
     takeDamage(){
-        this.health -= 5;
+        this.health -= 1;
     }
 }
 

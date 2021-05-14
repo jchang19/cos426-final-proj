@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import { BasicLights } from 'lights';
 import { globals } from '../../global';
 
-const BULLETSPEED = 0.1;
+const BULLETSPEED = 1;
 
 class SeedScene extends Scene {
     constructor() {
@@ -127,7 +127,7 @@ class SeedScene extends Scene {
         this.rotation.y = (rotationSpeed * timeStamp) / 10000;
 
         globals.bullets.forEach(b => {
-            b.position.addScaledVector(b.direction, BULLETSPEED * 2);
+            b.position.addScaledVector(b.direction, BULLETSPEED);
 
             globals.wolves.forEach(wolf => {
                 if (wolf.hitbox.containsPoint(b.position)){
