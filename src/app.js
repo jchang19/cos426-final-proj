@@ -11,6 +11,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 import { SeedScene } from 'scenes';
 import { globals } from './global';
+import { Wolf1} from 'objects';
+
 
 var bins = require.context("../", true, /.*\.bin/);
 var pngs = require.context("../", true, /.*\.png/);
@@ -199,6 +201,7 @@ const onAnimationFrameHandler = (timeStamp) => {
       if(mixer) mixer.update(delta);
     });
 
+    
     // Move Phoenix bird
     //globals.phoenix.move()
 
@@ -222,9 +225,18 @@ const onAnimationFrameHandler = (timeStamp) => {
         }
 
       });
+
+      // Spawn wolf every so often
+      if (globals.counter % 100 === 0){
+      var newwolf = new Wolf1(scene);
+      newwolf.scale.multiplyScalar(5);
+      scene.add(newwolf);
+      globals.wolves.push(newwolf)
+      }
     
     }
     
+    globals.counter += 1;
     window.requestAnimationFrame(onAnimationFrameHandler);
 };
 window.requestAnimationFrame(onAnimationFrameHandler);
