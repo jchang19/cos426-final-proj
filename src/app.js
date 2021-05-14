@@ -21,6 +21,7 @@ const ACCELERATION = 0.01;
 const DECELERATION = 0.02;
 const MAXSPEED = 0.05;
 var gameStarted = false;
+var gameover = false;
 
 // Initialize core ThreeJS components
 const scene = new SeedScene();
@@ -38,6 +39,7 @@ canvas.style.display = 'block'; // Removes padding below canvas
 document.body.style.margin = 0; // Removes margin around page
 document.body.style.overflow = 'hidden'; // Fix scrolling
 document.body.appendChild(canvas);
+gameoverscreen.style.display = 'none';
 
 // Add music and soudn effects
 var audio = new Audio(Soundtrack);
@@ -66,8 +68,16 @@ controls.addEventListener('lock', function () {
 controls.addEventListener('unlock', function () {
 
   blocker.style.display = 'block';
-  instructions.style.display = '';
   gameStarted = false;
+  if (gameover) {
+    gameoverscreen.style.display = '';
+    instructions.style.display = 'none';
+    document.getElementById('score').innerHTML = 'Score: ' + globals.score.toString();
+    // gameover = false;
+  } else {
+    instructions.style.display = '';
+    gameoverscreen.style.display = 'none';
+  }
 
 });
 
@@ -179,7 +189,14 @@ const controlsHandler = () => {
 
 // controls.connect();
 document.addEventListener('click', function () {
-    controls.lock();
+    if (gameover) {
+        instructions.style.display = '';
+        gameoverscreen.style.display = 'none';
+        gameover = false;
+        scene = new SeedScene();
+    } else {
+        controls.lock();
+    }
 });
 
 // shoot event
@@ -195,7 +212,10 @@ document.addEventListener('mousedown', onClick);
 // Render loop
 const onAnimationFrameHandler = (timeStamp) => {
     
-    // controls.update();
+    // check for gameover
+    if (gameover) {
+      controls.unlock();
+    }
     controlsHandler();
     renderer.render(scene, camera);
     scene.update && scene.update(timeStamp);
@@ -229,16 +249,18 @@ const onAnimationFrameHandler = (timeStamp) => {
 
             if (globals.sheep.health <= 0){
               scene.remove(globals.sheep);
+              gameover = true;
+              // controls.unlock();
             }
 
           });
 
           // Spawn wolf every so often
           if (globals.counter % 100 === 0){
-          var newwolf = new Wolf1(scene);
-          newwolf.scale.multiplyScalar(5);
-          scene.add(newwolf);
-          globals.wolves.push(newwolf)
+            var newwolf = new Wolf1(scene);
+            newwolf.scale.multiplyScalar(5);
+            scene.add(newwolf);
+            globals.wolves.push(newwolf)
           }
         }
 

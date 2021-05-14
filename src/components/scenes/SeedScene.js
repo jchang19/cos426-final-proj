@@ -148,11 +148,12 @@ class SeedScene extends Scene {
 
             globals.wolves.forEach(wolf => {
                 if (wolf.hitbox.containsPoint(b.position)){
-                    wolf.takeDamage()
-                    this.remove(b)
+                    wolf.takeDamage();
+                    this.remove(b);
+                    globals.bullets.splice(globals.bullets.indexOf(b), 1);
                     
                     if (wolf.health <= 0){
-                        this.remove(wolf)
+                        this.remove(wolf);
                         const index = globals.wolves.indexOf(wolf);
                         globals.wolves.splice(index, 1);
                         wolfhurt.play()
