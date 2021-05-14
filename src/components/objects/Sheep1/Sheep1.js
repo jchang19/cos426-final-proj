@@ -12,7 +12,8 @@ class Sheep1 extends Group {
 
         this.name = 'sheep1';
         this.hitbox = new Box3()
-        this.health = 100;
+        this.health = 1000;
+        this.maxhealth = 1000;
 
         loader.load(MODEL, (gltf) => {
             
@@ -49,14 +50,29 @@ class Sheep1 extends Group {
         }
         
         direction.applyEuler(this.rotation)
-        this.position.add(direction.normalize().multiplyScalar(0.01))
+
+        var newpos = this.position.clone().add(direction.normalize().multiplyScalar(0.08));
+
+        // check if moving out of arena
+        if (globals.arena.containsPoint(newpos) === false){
+            direction.multiplyScalar(-1)
+            this.position.add(direction.normalize().multiplyScalar(0.08));
+            
+            this.rotation.y +=  Math.PI;
+        }
+
+        
+        else{
+            this.position.add(direction.normalize().multiplyScalar(0.08));
+        }
+
         this.hitbox.setFromCenterAndSize(this.position, this.scale.clone().multiplyScalar(1))
         this.hitbox.min.add(new Vector3(0, 1, 0).multiplyScalar(1.5))
         this.hitbox.max.add(new Vector3(0, 1, 0).multiplyScalar(1.5))
     }
 
     takeDamage(){
-        this.health -= 100;
+        this.health -= 1;
     }
 }
 

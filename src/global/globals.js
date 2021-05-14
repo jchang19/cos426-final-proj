@@ -7,5 +7,8 @@ export default{
     phoenix: null,
     phoenix_flag: null,
     birds: null,
+    arena: null,
+    counter : 0,
     pointer:null,
+    score: 0,
 };

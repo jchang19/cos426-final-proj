@@ -46,7 +46,17 @@ class Wolf1 extends Group {
 
         this.rotation.y = angle;
 
-        this.position.add(direction.normalize().multiplyScalar(0.08));
+        var newpos = this.position.clone().add(direction.normalize().multiplyScalar(0.08));
+
+        // check if moving out of arena
+        if (globals.arena.containsPoint(newpos) === false){
+            direction.multiplyScalar(-1)
+            this.position.add(direction.normalize().multiplyScalar(0.08));
+        }
+        else{
+            this.position.add(direction.normalize().multiplyScalar(0.08));
+        }
+
         this.position.y =  -45;
 
         // Update hitbox
@@ -59,7 +69,7 @@ class Wolf1 extends Group {
     }
 
     takeDamage(){
-        this.health -= 10
+        this.health -= 50
     }
 }
 
