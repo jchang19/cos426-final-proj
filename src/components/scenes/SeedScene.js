@@ -95,11 +95,11 @@ class SeedScene extends Scene {
         globals.sheep = sheep;
 
         // Hitbox visualizer
-        const sheephelper = new Box3Helper( sheep.hitbox, 0xffff00 );
-        this.add( sheephelper );
+        // const sheephelper = new Box3Helper( sheep.hitbox, 0xffff00 );
+        // this.add( sheephelper );
 
-        const wolfhelper = new Box3Helper( wolf.hitbox, 0xffff00 );
-        this.add( wolfhelper );
+        // const wolfhelper = new Box3Helper( wolf.hitbox, 0xffff00 );
+        // this.add( wolfhelper );
 
 
         // initialize sheep and wolf global arrays
@@ -156,6 +156,7 @@ class SeedScene extends Scene {
             globals.wolves.forEach(wolf => {
                 if (wolf.hitbox.containsPoint(b.position)){
                     wolf.takeDamage()
+                    this.remove(b)
                     
                     if (wolf.health <= 0){
                         this.remove(wolf)
