@@ -213,13 +213,14 @@ const onAnimationFrameHandler = (timeStamp) => {
     // Move regular birds
     globals.birds.move()
 
-    globals.sheep.move()
+    if (gameStarted) {
+        globals.sheep.move()
 
-    // MOVE WOLVES
-    if (globals.sheep.health > 0 && gameStarted){
+        // MOVE WOLVES
+        if (globals.sheep.health > 0){
 
-      globals.wolves.forEach((wolf) => {
-        wolf.move();
+          globals.wolves.forEach((wolf) => {
+            wolf.move();
 
         if (wolf.hitbox.clone().intersectsBox(globals.sheep.hitbox)){
           globals.sheep.takeDamage();
@@ -227,31 +228,31 @@ const onAnimationFrameHandler = (timeStamp) => {
           updateHealthBar(globals.sheep.health);
         }
 
-        if (globals.sheep.health <= 0){
-          scene.remove(globals.sheep);
+            if (globals.sheep.health <= 0){
+              scene.remove(globals.sheep);
+            }
+
+          });
+
+          // Spawn wolf every so often
+          if (globals.counter % 100 === 0){
+          var newwolf = new Wolf1(scene);
+          newwolf.scale.multiplyScalar(5);
+          scene.add(newwolf);
+          globals.wolves.push(newwolf)
+          }
         }
 
-      });
-
-      // Spawn wolf every so often
-      if (globals.counter % 100 === 0){
-      var newwolf = new Wolf1(scene);
-      newwolf.scale.multiplyScalar(5);
-      scene.add(newwolf);
-      globals.wolves.push(newwolf)
-      }
+        if (globals.counter % 1000 === 0){
+          howlaudio.play();
+        }
+        if (globals.counter % 800 === 0){
+          growlaudio.play();
+        }
+        if (globals.counter % 500 === 0){
+          baa.play();
+        }
     }
-
-    if (globals.counter % 1000 === 0){
-      howlaudio.play();
-    }
-    if (globals.counter % 800 === 0){
-      growlaudio.play();
-    }
-    if (globals.counter % 500 === 0){
-      baa.play();
-    }
-    
     globals.counter += 1;
     window.requestAnimationFrame(onAnimationFrameHandler);
 };

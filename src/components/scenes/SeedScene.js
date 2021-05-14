@@ -34,17 +34,6 @@ class SeedScene extends Scene {
         s_mountains.scale.y *= 0.5;
         this.add(s_mountains, lights);
 
-        /*
-        const gun = new Gun(this);
-        gun.position.set(15,-7,6.7);
-        gun.rotation.z = -1 * Math.PI/10;
-        gun.rotation.y = -1 * Math.PI/7;
-        gun.scale.multiplyScalar(0.0005);
-        this.add(gun, lights);
-        */
-       
-        //globals.gun = gun;
-
         // Add Phoenix
         const phoenix = new Phoenix(this);
         phoenix.scale.multiplyScalar(0.1);
@@ -127,14 +116,15 @@ class SeedScene extends Scene {
     shootBullet(controls) {
         var camera = controls.getObject();
 
-        const bullet = new THREE.Mesh(new THREE.SphereGeometry(0.1, 32, 32), new THREE.MeshBasicMaterial({
-            color: "aqua"
+        const bullet = new THREE.Mesh(new THREE.ConeGeometry(0.05, 0.2, 32, 32), new THREE.MeshBasicMaterial({
+            color: 'black'
         })); 
         // camera.add(bullet);
         bullet.position.copy(camera.getWorldPosition(new Vector3()));
         bullet.quaternion.copy(camera.quaternion);
         bullet.translateZ(-5);
         bullet.translateY(-0.2);
+        bullet.rotateX(Math.PI / 2);
         bullet.direction = controls.getDirection(new Vector3()).normalize();
         bullet.direction.y -= 0.05;
         bullet.timer = new Clock();
