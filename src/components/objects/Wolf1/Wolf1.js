@@ -35,15 +35,15 @@ class Wolf1 extends Group {
     }
 
     move() {
-        var direction = globals.sheeps[0].position.clone().sub(this.position).normalize();
+        var direction = globals.sheep.position.clone().sub(this.position).normalize();
         let angle = new Vector3(0, 0, 1).angleTo(direction);
-        if (globals.sheeps[0].position.x - this.position.x < 0) {
+        if (globals.sheep.position.x - this.position.x < 0) {
             angle = Math.PI * 2 - angle;
         }
 
-        this.rotation.y = angle
+        this.rotation.y = angle;
 
-        this.position.add(direction.normalize().multiplyScalar(0.01))
+        this.position.add(direction.normalize().multiplyScalar(0.01));
         this.position.y =  -8.5
     }
 }

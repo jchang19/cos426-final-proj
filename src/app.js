@@ -211,6 +211,10 @@ const onAnimationFrameHandler = (timeStamp) => {
       if(mixer) mixer.update(delta);
     });
 
+    globals.wolves.forEach((wolf) => {
+      wolf.move();
+    });
+
     globals.sheep.move();
 
     // MOVE WOLVES
@@ -223,7 +227,7 @@ const onAnimationFrameHandler = (timeStamp) => {
         }
   
         if (globals.sheep.health <= 0){
-          scene.remove(globals.sheep)
+          scene.remove(globals.sheep);
         }
       }
     }

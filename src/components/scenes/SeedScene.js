@@ -64,9 +64,7 @@ class SeedScene extends Scene {
         // this.add( helper2 );
 
         // initialize sheep and wolf global arrays
-        globals.wolves = [];
         globals.wolves.push(wolf);
-
 
         globals.sheep = sheep;
 

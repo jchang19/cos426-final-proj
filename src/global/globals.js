@@ -1,5 +1,5 @@
 export default{
-    wolves: null,
+    wolves: [],
     mixers: [],
     gun: null,
     sheep: null,
