@@ -10,6 +10,8 @@ import { WebGLRenderer, PerspectiveCamera, Vector3, Clock } from 'three';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 import { SeedScene } from 'scenes';
 import { globals } from './global';
+import { Wolf1} from 'objects';
+import {WolfHowl, Soundtrack, WolfGrowl, Sheepbaa} from './audio'
 
 // Clock
 var clock = new Clock();
@@ -37,6 +39,13 @@ document.body.style.margin = 0; // Removes margin around page
 document.body.style.overflow = 'hidden'; // Fix scrolling
 document.body.appendChild(canvas);
 
+// Add music and soudn effects
+var audio = new Audio(Soundtrack);
+var howlaudio = new Audio(WolfHowl);
+var growlaudio = new Audio(WolfGrowl);
+var baa = new Audio(Sheepbaa);
+// audio.play();
+// console.log(audio)
 
 camera.add(globals.pointer);
 globals.pointer.position.set(3.1,10,-5);
@@ -191,15 +200,6 @@ const onAnimationFrameHandler = (timeStamp) => {
     controlsHandler();
     renderer.render(scene, camera);
     scene.update && scene.update(timeStamp);
-
-
-    // console.log(timeStamp)
-    // Spawn wolf every 5 seconds
-    // if (timeStamp % 5000 === 0){
-    //   var newwolf = new Wolf();
-    //   scene.add(newwolf);
-    //   globals.wolves.push(newwolf)
-    // }
     
     // Animate Animals
     var delta = clock.getDelta();
@@ -207,15 +207,17 @@ const onAnimationFrameHandler = (timeStamp) => {
       if(mixer) mixer.update(delta);
     });
 
+    
     // Move Phoenix bird
     //globals.phoenix.move()
 
     // Move regular birds
     globals.birds.move()
 
+    globals.sheep.move()
+
     // MOVE WOLVES
     if (globals.sheep.health > 0 && gameStarted){
-
 
       globals.wolves.forEach((wolf) => {
         wolf.move();
@@ -229,9 +231,27 @@ const onAnimationFrameHandler = (timeStamp) => {
         }
 
       });
-    
+
+      // Spawn wolf every so often
+      if (globals.counter % 100 === 0){
+      var newwolf = new Wolf1(scene);
+      newwolf.scale.multiplyScalar(5);
+      scene.add(newwolf);
+      globals.wolves.push(newwolf)
+      }
+    }
+
+    if (globals.counter % 1000 === 0){
+      howlaudio.play();
+    }
+    if (globals.counter % 800 === 0){
+      growlaudio.play();
+    }
+    if (globals.counter % 500 === 0){
+      baa.play();
     }
     
+    globals.counter += 1;
     window.requestAnimationFrame(onAnimationFrameHandler);
 };
 window.requestAnimationFrame(onAnimationFrameHandler);

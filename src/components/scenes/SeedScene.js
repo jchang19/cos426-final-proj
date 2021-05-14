@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { BasicLights } from 'lights';
 import { globals } from '../../global';
 
-const BULLETSPEED = 0.5;
+const BULLETSPEED = 1;
 const BULLETLIFESPAN = 5;
 
 class SeedScene extends Scene {
@@ -80,7 +80,6 @@ class SeedScene extends Scene {
         wolf.scale.multiplyScalar(5);
         this.add(sheep, wolf);
 
-
         // add pointer
         const pointer = new Pointer(this);
         pointer.scale.multiplyScalar(1);
@@ -90,7 +89,6 @@ class SeedScene extends Scene {
         // initialize sheep and wolf global arrays
         globals.wolves = [];
         globals.wolves.push(wolf);
-
         globals.sheep = sheep;
 
         // Hitbox visualizer
@@ -115,6 +113,7 @@ class SeedScene extends Scene {
         var min = new Vector3(70,-45,30);
         var max = new Vector3(200, -7, 200);
         const box = new Box3(min, max);
+        globals.arena = box;
         const helper = new Box3Helper( box, 0xFF0000 );
         this.add(helper, lights);
     }
@@ -149,7 +148,7 @@ class SeedScene extends Scene {
 
         // update bullets & wolf damage
         globals.bullets.forEach(b => {
-            b.position.addScaledVector(b.direction, BULLETSPEED * 2);
+            b.position.addScaledVector(b.direction, BULLETSPEED);
 
             globals.wolves.forEach(wolf => {
                 if (wolf.hitbox.containsPoint(b.position)){
