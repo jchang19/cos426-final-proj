@@ -223,7 +223,7 @@ const onAnimationFrameHandler = (timeStamp) => {
 
         if (wolf.hitbox.clone().intersectsBox(globals.sheep.hitbox)){
           globals.sheep.takeDamage();
-          sheephurt.play()
+          sheephurt.play();
         }
 
         if (globals.sheep.health <= 0){
