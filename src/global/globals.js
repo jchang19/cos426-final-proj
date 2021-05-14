@@ -9,4 +9,5 @@ export default{
     birds: null,
     arena: null,
     counter : 0,
+    pointer:null,
 };

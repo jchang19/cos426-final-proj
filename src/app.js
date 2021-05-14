@@ -7,17 +7,11 @@
  *
  */
 import { WebGLRenderer, PerspectiveCamera, Vector3, Clock } from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js';
 import { SeedScene } from 'scenes';
 import { globals } from './global';
 import { Wolf1} from 'objects';
 import {WolfHowl, Soundtrack, WolfGrowl, Sheepbaa} from './audio'
-
-var bins = require.context("../", true, /.*\.bin/);
-var pngs = require.context("../", true, /.*\.png/);
-console.log(bins);
-console.log(pngs);
 
 // Clock
 var clock = new Clock();
@@ -25,7 +19,8 @@ var clock = new Clock();
 // CONSTANTS
 const ACCELERATION = 0.01;
 const DECELERATION = 0.02;
-const MAXSPEED = 0.1;
+const MAXSPEED = 0.05;
+var gameStarted = false;
 
 // Initialize core ThreeJS components
 const scene = new SeedScene();
@@ -52,8 +47,9 @@ var baa = new Audio(Sheepbaa);
 // audio.play();
 // console.log(audio)
 
-//camera.add(globals.gun);
-//globals.gun.position.set(17,-7,8);
+camera.add(globals.pointer);
+globals.pointer.position.set(3.1,10,-5);
+globals.pointer.rotation.y = Math.PI/6;
 
 // Set up controls
 const controls = new PointerLockControls(camera, document.body);
@@ -61,6 +57,7 @@ controls.addEventListener('lock', function () {
 
   instructions.style.display = 'none';
   blocker.style.display = 'none';
+  gameStarted = true;
 
 });
 
@@ -68,6 +65,7 @@ controls.addEventListener('unlock', function () {
 
   blocker.style.display = 'block';
   instructions.style.display = '';
+  gameStarted = false;
 
 });
 
@@ -82,59 +80,61 @@ var vBack = 0.0;
 var vRight = 0.0;
 
 const onKeyDown = function (event) {
+  if (gameStarted) {
+    switch (event.code) {
 
-  switch (event.code) {
+      case 'ArrowUp':
+      case 'KeyW':
+        moveForward = true;
+        break;
 
-    case 'ArrowUp':
-    case 'KeyW':
-      moveForward = true;
-      break;
+      case 'ArrowLeft':
+      case 'KeyA':
+        moveLeft = true;
+        break;
 
-    case 'ArrowLeft':
-    case 'KeyA':
-      moveLeft = true;
-      break;
+      case 'ArrowDown':
+      case 'KeyS':
+        moveBackward = true;
+        break;
 
-    case 'ArrowDown':
-    case 'KeyS':
-      moveBackward = true;
-      break;
+      case 'ArrowRight':
+      case 'KeyD':
+        moveRight = true;
+        break;
+      
+      case 'Space':
+        onClick();
 
-    case 'ArrowRight':
-    case 'KeyD':
-      moveRight = true;
-      break;
-    
-    case 'Space':
-      onClick();
-
+    }
   }
 };
 
 const onKeyUp = function (event) {
+  if (gameStarted) {
+    switch (event.code) {
 
-  switch (event.code) {
+      case 'ArrowUp':
+      case 'KeyW':
+        moveForward = false;
+        break;
 
-    case 'ArrowUp':
-    case 'KeyW':
-      moveForward = false;
-      break;
+      case 'ArrowLeft':
+      case 'KeyA':
+        moveLeft = false;
+        break;
 
-    case 'ArrowLeft':
-    case 'KeyA':
-      moveLeft = false;
-      break;
+      case 'ArrowDown':
+      case 'KeyS':
+        moveBackward = false;
+        break;
 
-    case 'ArrowDown':
-    case 'KeyS':
-      moveBackward = false;
-      break;
+      case 'ArrowRight':
+      case 'KeyD':
+        moveRight = false;
+        break;
 
-    case 'ArrowRight':
-    case 'KeyD':
-      moveRight = false;
-      break;
-
+    }
   }
 };
 document.addEventListener('keydown', onKeyDown);
@@ -187,12 +187,11 @@ document.addEventListener('click', function () {
 // shoot event
 const onClick = function (event) {
     //console.log('shoot');
-    scene.shootBullet(controls);
+    if (gameStarted) {
+        scene.shootBullet( controls);
+    }
 }
 document.addEventListener('mousedown', onClick);
-// controls.addEventListener('lock', function () {
-//     document.addEventListener('mousedown', onClick);
-// });
 
 // Render loop
 const onAnimationFrameHandler = (timeStamp) => {
@@ -218,7 +217,7 @@ const onAnimationFrameHandler = (timeStamp) => {
     globals.sheep.move()
 
     // MOVE WOLVES
-    if (globals.sheep.health > 0){
+    if (globals.sheep.health > 0 && gameStarted){
 
       globals.wolves.forEach((wolf) => {
         wolf.move();

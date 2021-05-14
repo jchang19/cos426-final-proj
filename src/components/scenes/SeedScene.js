@@ -1,11 +1,11 @@
-import * as Dat from 'dat.gui';
-import { Scene, Color, Vector3, Box3, Box3Helper } from 'three';
-import { Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf1, Phoenix, Birds} from 'objects';
+import { Scene, Color, Vector3, Box3, Box3Helper, Clock } from 'three';
+import { Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf1, Phoenix, Birds, Barn, Cactus, Windmill, Pointer} from 'objects';
 import * as THREE from 'three';
 import { BasicLights } from 'lights';
 import { globals } from '../../global';
 
 const BULLETSPEED = 1;
+const BULLETLIFESPAN = 5;
 
 class SeedScene extends Scene {
     constructor() {
@@ -14,7 +14,6 @@ class SeedScene extends Scene {
 
         // Init state
         this.state = {
-            gui: new Dat.GUI(), // Create GUI for scene
             rotationSpeed: 0,
             updateList: [],
         };
@@ -39,11 +38,6 @@ class SeedScene extends Scene {
         gun.scale.multiplyScalar(0.0005);
         this.add(gun, lights);
         globals.gun = gun;
-        /*const cowboy = new Cowboy(this);
-        cowboy.position.set(-2.2,-4,0);
-        cowboy.scale.multiplyScalar(0.003);
-        cowboy.rotation.y = -1 * Math.PI/2;
-        this.add(cowboy, lights); */
 
         // Add Phoenix
         const phoenix = new Phoenix(this);
@@ -62,13 +56,37 @@ class SeedScene extends Scene {
         this.add(birds, lights);
         globals.birds = birds;
 
+        // Add Barn 
+        const barn = new Barn(this);
+        barn.scale.multiplyScalar(0.05);
+        barn.position.set(300, -45,0);
+        barn.rotation.y = Math.PI;
+        this.add(barn, lights);
+        
+
+        // add Multiple Cacti
+        this.addCacti(this, lights);
+
+        // add windmill
+        const windmill = new Windmill(this);
+        windmill.scale.multiplyScalar(0.1);
+        windmill.position.set(-300, -45,10);
+        windmill.rotation.y = -1 * Math.PI/2;
+        this.add(windmill, lights);
+
         // Add sheep and wolves to scene
         const sheep = new Sheep1(this);
         const wolf = new Wolf1(this);
         wolf.scale.multiplyScalar(5);
         this.add(sheep, wolf);
 
-          // initialize sheep and wolf global variables
+        // add pointer
+        const pointer = new Pointer(this);
+        pointer.scale.multiplyScalar(1);
+        pointer.rotation.y = Math.PI/2;
+        globals.pointer = pointer;
+
+        // initialize sheep and wolf global arrays
         globals.wolves = [];
         globals.wolves.push(wolf);
         globals.sheep = sheep;
@@ -80,6 +98,7 @@ class SeedScene extends Scene {
         const wolfhelper = new Box3Helper( wolf.hitbox, 0xffff00 );
         this.add( wolfhelper );
 
+
         // initialize sheep and wolf global arrays
         globals.wolves.push(wolf);
         globals.sheep = sheep;
@@ -89,10 +108,6 @@ class SeedScene extends Scene {
 
         //this.state.prevMapObject = s_mountains;
         //this.state.prevLightsObject = lights;
-
-        // Populate GUI
-        // this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
-        //this.state.gui.add(this.state, 'map', {map1: '1', map2: '2', map3: '3',map4: '4'}).setValue('1');
         
         // add box to scene 
         var min = new Vector3(70,-45,30);
@@ -105,14 +120,19 @@ class SeedScene extends Scene {
 
     shootBullet(controls) {
         var camera = controls.getObject();
+
         const bullet = new THREE.Mesh(new THREE.SphereGeometry(0.1, 32, 32), new THREE.MeshBasicMaterial({
             color: "aqua"
         })); 
         // camera.add(bullet);
         bullet.position.copy(camera.getWorldPosition(new Vector3()));
         bullet.quaternion.copy(camera.quaternion);
-        bullet.translateX(-0.5);
+        bullet.translateZ(-5);
+        bullet.translateY(-0.2);
         bullet.direction = controls.getDirection(new Vector3()).normalize();
+        bullet.direction.y -= 0.05;
+        bullet.timer = new Clock();
+        bullet.timer.start();
 
         globals.bullets.push(bullet);
         this.add(bullet);
@@ -126,6 +146,7 @@ class SeedScene extends Scene {
         const {rotationSpeed, updateList} = this.state;
         this.rotation.y = (rotationSpeed * timeStamp) / 10000;
 
+        // update bullets & wolf damage
         globals.bullets.forEach(b => {
             b.position.addScaledVector(b.direction, BULLETSPEED);
 
@@ -140,6 +161,10 @@ class SeedScene extends Scene {
                     }
                 }
             })
+            // remove bullets from scene after set amount of time (defined at top)
+            if (b.timer.getElapsedTime() >= BULLETLIFESPAN) {
+                this.remove(b);
+            }
         });
 
             
@@ -149,25 +174,57 @@ class SeedScene extends Scene {
         }
     }
 
-    // function to return the map object given its corresponding id
-    mapObjectFromId(mapId) {
-        var newMap = null;
-        if (mapId == '1') {
-            newMap = new Bordered_Mountains(this);
-            newMap.position.set(0,0,0);
-        }
-        else if (mapId == '2') {
-            
-            newMap.position.set(0,0,0);
-        }
-        else if (mapId == '3') {
-            
-            newMap.position.set(0,0,0);
+    addCacti(scene, lights) {
+        var n = 15;
+
+        // randomly add cacti around four sides of the box
+        
+        // side 1
+        for(let i=0; i<n; i++) {
+            let x = this.randomNumber( 30, 300);
+            let z = this.randomNumber(205, 500);
+            const cactus = new Cactus(this);
+            cactus.scale.multiplyScalar(this.randomNumber(0.3,1));
+            cactus.position.set(x, -55,z);
+            scene.add(cactus, lights);
         }
 
-        return newMap;
+        // side 2
+        for(let i=0; i<n; i++) {
+            let x = this.randomNumber( 205, 500);
+            let z = this.randomNumber(100, 205);
+            const cactus = new Cactus(this);
+            cactus.scale.multiplyScalar(this.randomNumber(0.3,1));
+            cactus.position.set(x, -55,z);
+            scene.add(cactus, lights);
+        }
+
+        // side 3
+        for(let i=0; i<n; i++) {
+            let x = this.randomNumber(-300, 0);
+            let z = this.randomNumber(-10, 290);
+            const cactus = new Cactus(this);
+            cactus.scale.multiplyScalar(this.randomNumber(0.3,1));
+            cactus.position.set(x, -40,z);
+            scene.add(cactus, lights);
+        }
+
+        // side 4
+        for(let i=0; i<n; i++) {
+            let x = this.randomNumber(30, 200);
+            let z = this.randomNumber(-270, 30);
+            const cactus = new Cactus(this);
+            cactus.scale.multiplyScalar(this.randomNumber(0.3,1));
+            cactus.position.set(x, -40,z);
+            scene.add(cactus, lights);
+        }
 
     }
+
+    randomNumber(min, max) {
+        return (Math.random() * (max - min) + min);
+    }
+
 }
 
 export default SeedScene;
