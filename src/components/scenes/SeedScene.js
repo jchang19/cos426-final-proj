@@ -1,6 +1,6 @@
 import * as Dat from 'dat.gui';
 import { Scene, Color, Vector3, Box3, Box3Helper } from 'three';
-import { Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf1, Phoenix, Birds, Barn, Cactus} from 'objects';
+import { Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf1, Phoenix, Birds, Barn, Cactus, Windmill} from 'objects';
 import * as THREE from 'three';
 import { BasicLights } from 'lights';
 import { globals } from '../../global';
@@ -73,7 +73,12 @@ class SeedScene extends Scene {
         // add Multiple Cacti
         this.addCacti(this, lights);
 
-
+        // add windmill
+        const windmill = new Windmill(this);
+        windmill.scale.multiplyScalar(0.1);
+        windmill.position.set(-300, -45,10);
+        windmill.rotation.y = -1 * Math.PI/2;
+        this.add(windmill, lights);
 
         // Add sheep and wolves to scene
         const sheep = new Sheep1(this);
