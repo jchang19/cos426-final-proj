@@ -174,7 +174,7 @@ class SeedScene extends Scene {
     }
 
     addCacti(scene, lights) {
-        var n = 15;
+        var n = 10;
 
         // randomly add cacti around four sides of the box
         
