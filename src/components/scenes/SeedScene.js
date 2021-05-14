@@ -32,12 +32,15 @@ class SeedScene extends Scene {
         s_mountains.scale.y *= 0.5;
         this.add(s_mountains, lights);
 
+        /*
         const gun = new Gun(this);
         gun.position.set(15,-7,6.7);
         gun.rotation.z = -1 * Math.PI/10;
         gun.rotation.y = -1 * Math.PI/7;
         gun.scale.multiplyScalar(0.0005);
         this.add(gun, lights);
+        */
+       
         globals.gun = gun;
         /*const cowboy = new Cowboy(this);
         cowboy.position.set(-2.2,-4,0);
