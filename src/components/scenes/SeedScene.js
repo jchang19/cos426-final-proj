@@ -64,11 +64,11 @@ class SeedScene extends Scene {
         globals.sheep = sheep;
 
         // Hitbox visualizer
-        // const helper = new Box3Helper( sheep.hitbox, 0xffff00 );
-        // this.add( helper );
+        const sheephelper = new Box3Helper( sheep.hitbox, 0xffff00 );
+        this.add( sheephelper );
 
-        // const helper2 = new Box3Helper( wolf.hitbox, 0xffff00 );
-        // this.add( helper2 );
+        const wolfhelper = new Box3Helper( wolf.hitbox, 0xffff00 );
+        this.add( wolfhelper );
 
         // initialize sheep and wolf global arrays
         globals.wolves.push(wolf);
