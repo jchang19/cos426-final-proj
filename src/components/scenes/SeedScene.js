@@ -1,11 +1,11 @@
-import * as Dat from 'dat.gui';
-import { Scene, Color, Vector3, Box3, Box3Helper } from 'three';
+import { Scene, Color, Vector3, Box3, Box3Helper, Clock } from 'three';
 import { Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf1, Phoenix, Birds, Barn, Cactus, Windmill, Pointer} from 'objects';
 import * as THREE from 'three';
 import { BasicLights } from 'lights';
 import { globals } from '../../global';
 
-const BULLETSPEED = 0.1;
+const BULLETSPEED = 0.5;
+const BULLETLIFESPAN = 5;
 
 class SeedScene extends Scene {
     constructor() {
@@ -14,7 +14,6 @@ class SeedScene extends Scene {
 
         // Init state
         this.state = {
-            gui: new Dat.GUI(), // Create GUI for scene
             rotationSpeed: 0,
             updateList: [],
         };
@@ -39,11 +38,6 @@ class SeedScene extends Scene {
         gun.scale.multiplyScalar(0.0005);
         this.add(gun, lights);
         globals.gun = gun;
-        /*const cowboy = new Cowboy(this);
-        cowboy.position.set(-2.2,-4,0);
-        cowboy.scale.multiplyScalar(0.003);
-        cowboy.rotation.y = -1 * Math.PI/2;
-        this.add(cowboy, lights); */
 
         // Add Phoenix
         const phoenix = new Phoenix(this);
@@ -116,10 +110,6 @@ class SeedScene extends Scene {
 
         //this.state.prevMapObject = s_mountains;
         //this.state.prevLightsObject = lights;
-
-        // Populate GUI
-        // this.state.gui.add(this.state, 'rotationSpeed', -5, 5);
-        //this.state.gui.add(this.state, 'map', {map1: '1', map2: '2', map3: '3',map4: '4'}).setValue('1');
         
         // add box to scene 
         var min = new Vector3(70,-45,30);
@@ -138,8 +128,12 @@ class SeedScene extends Scene {
         // camera.add(bullet);
         bullet.position.copy(camera.getWorldPosition(new Vector3()));
         bullet.quaternion.copy(camera.quaternion);
-        //bullet.translateX(-0.5);
+        bullet.translateZ(-5);
+        bullet.translateY(-0.2);
         bullet.direction = controls.getDirection(new Vector3()).normalize();
+        bullet.direction.y -= 0.05;
+        bullet.timer = new Clock();
+        bullet.timer.start();
 
         globals.bullets.push(bullet);
         this.add(bullet);
@@ -153,6 +147,7 @@ class SeedScene extends Scene {
         const {rotationSpeed, updateList} = this.state;
         this.rotation.y = (rotationSpeed * timeStamp) / 10000;
 
+        // update bullets & wolf damage
         globals.bullets.forEach(b => {
             b.position.addScaledVector(b.direction, BULLETSPEED * 2);
 
@@ -167,6 +162,10 @@ class SeedScene extends Scene {
                     }
                 }
             })
+            // remove bullets from scene after set amount of time (defined at top)
+            if (b.timer.getElapsedTime() >= BULLETLIFESPAN) {
+                this.remove(b);
+            }
         });
 
             
