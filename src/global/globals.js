@@ -7,4 +7,5 @@ export default{
     phoenix: null,
     phoenix_flag: null,
     birds: null,
+    pointer:null,
 };

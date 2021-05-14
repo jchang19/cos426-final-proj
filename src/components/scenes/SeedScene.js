@@ -1,6 +1,6 @@
 import * as Dat from 'dat.gui';
 import { Scene, Color, Vector3, Box3, Box3Helper } from 'three';
-import { Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf1, Phoenix, Birds, Barn, Cactus, Windmill} from 'objects';
+import { Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf1, Phoenix, Birds, Barn, Cactus, Windmill, Pointer} from 'objects';
 import * as THREE from 'three';
 import { BasicLights } from 'lights';
 import { globals } from '../../global';
@@ -86,6 +86,13 @@ class SeedScene extends Scene {
         wolf.scale.multiplyScalar(5);
         this.add(sheep, wolf);
 
+
+        // add pointer
+        const pointer = new Pointer(this);
+        pointer.scale.multiplyScalar(1);
+        pointer.rotation.y = Math.PI/2;
+        globals.pointer = pointer;
+
         // initialize sheep and wolf global arrays
         globals.wolves = [];
         globals.wolves.push(wolf);
@@ -98,6 +105,7 @@ class SeedScene extends Scene {
 
         const wolfhelper = new Box3Helper( wolf.hitbox, 0xffff00 );
         this.add( wolfhelper );
+
 
         // initialize sheep and wolf global arrays
         globals.wolves.push(wolf);
@@ -123,13 +131,14 @@ class SeedScene extends Scene {
 
     shootBullet(controls) {
         var camera = controls.getObject();
+
         const bullet = new THREE.Mesh(new THREE.SphereGeometry(0.1, 32, 32), new THREE.MeshBasicMaterial({
             color: "aqua"
         })); 
         // camera.add(bullet);
         bullet.position.copy(camera.getWorldPosition(new Vector3()));
         bullet.quaternion.copy(camera.quaternion);
-        bullet.translateX(-0.5);
+        //bullet.translateX(-0.5);
         bullet.direction = controls.getDirection(new Vector3()).normalize();
 
         globals.bullets.push(bullet);

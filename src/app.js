@@ -43,8 +43,9 @@ document.body.style.overflow = 'hidden'; // Fix scrolling
 document.body.appendChild(canvas);
 
 
-//camera.add(globals.gun);
-//globals.gun.position.set(17,-7,8);
+camera.add(globals.pointer);
+globals.pointer.position.set(3.1,10,-5);
+globals.pointer.rotation.y = Math.PI/6;
 
 // Set up controls
 const controls = new PointerLockControls(camera, document.body);

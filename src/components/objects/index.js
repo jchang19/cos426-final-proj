@@ -13,3 +13,4 @@ export * from './Birds';
 export * from './Barn';
 export * from './Cactus';
 export * from './Windmill';
+export * from './Pointer';
