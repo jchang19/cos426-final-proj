@@ -31,8 +31,8 @@ const camera = new PerspectiveCamera();
 const renderer = new WebGLRenderer({ antialias: true });
 
 // Set up camera
-camera.position.set(15.7,-5, 7.5);
-camera.lookAt(new Vector3(-2.2, -2, 0));
+camera.position.set(75,-40, 50);
+camera.lookAt(new Vector3(200, -40, 200));
 
 // Set up renderer, canvas, and minor CSS adjustments
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -162,8 +162,8 @@ const controlsHandler = () => {
     }
 
     // update position
-    controls.moveForward(vFront - vBack);
-    controls.moveRight(vRight - vLeft);
+    controls.moveForward((vFront - vBack)*10); // Jayson magnified this temporarily 
+    controls.moveRight((vRight - vLeft)*10);
     var x = camera.position.x -0.7;
     var y = camera.position.y;
     var z = camera.position.z - 0.8; 
@@ -177,7 +177,7 @@ document.addEventListener('click', function () {
 
 // shoot event
 const onClick = function (event) {
-    console.log('shoot');
+    //console.log('shoot');
     scene.shootBullet(controls);
 }
 document.addEventListener('mousedown', onClick);

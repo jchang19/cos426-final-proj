@@ -28,6 +28,8 @@ class SeedScene extends Scene {
         // add striking moutains to the scene as a default
         const s_mountains = new S_Mountains(this);
         s_mountains.position.set(0,0,0);
+        s_mountains.scale.multiplyScalar(10);
+        s_mountains.scale.y *= 0.5;
         this.add(s_mountains, lights);
 
         const gun = new Gun(this);
@@ -52,14 +54,14 @@ class SeedScene extends Scene {
         // Add sheep and wolves to scene
         const sheep = new Sheep1(this);
         const wolf = new Wolf1(this);
-        wolf.scale.multiplyScalar(0.75);
+        wolf.scale.multiplyScalar(5);
         this.add(sheep, wolf);
 
           // initialize sheep and wolf global arrays
-          globals.wolves = [];
-          globals.wolves.push(wolf);
-  
-          globals.sheep = sheep;
+        globals.wolves = [];
+        globals.wolves.push(wolf);
+
+        globals.sheep = sheep;
 
         // Hitbox visualizer
         // const helper = new Box3Helper( sheep.hitbox, 0xffff00 );
@@ -83,8 +85,8 @@ class SeedScene extends Scene {
         //this.state.gui.add(this.state, 'map', {map1: '1', map2: '2', map3: '3',map4: '4'}).setValue('1');
         
         // add box to scene 
-        var min = new Vector3(1,-7.0,3);
-        var max = new Vector3(28, -3, 22);
+        var min = new Vector3(70,-45,30);
+        var max = new Vector3(200, -7, 200);
         const box = new Box3(min, max);
         const helper = new Box3Helper( box, 0xFF0000 );
         this.add(helper, lights);

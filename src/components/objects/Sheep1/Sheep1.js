@@ -18,9 +18,17 @@ class Sheep1 extends Group {
             var action = mixer.clipAction( gltf.animations[ 0 ] );
             action.play();
 
+            this.scale.multiplyScalar(2.5);
+            var max_x = 200;
+            var min_x = 70;
+            var max_z = 200;
+            var min_z = 30;
+            let x = Math.random() * (max_x - min_x) + min_x;
+            let z = Math.random() * (max_z - min_z) + min_z;
 
-            gltf.scene.children[0].scale.multiplyScalar(0.25)
-            gltf.scene.children[0].position.y = -7;
+            this.position.x = x;
+            this.position.z = z;
+            this.position.y = -45;
             this.add(gltf.scene);
             globals.mixers.push(mixer);
         });
