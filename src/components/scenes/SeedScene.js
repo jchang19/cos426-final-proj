@@ -3,9 +3,12 @@ import { Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wol
 import * as THREE from 'three';
 import { BasicLights } from 'lights';
 import { globals } from '../../global';
+import { HurtWolf } from '../../audio';
 
 const BULLETSPEED = 1;
 const BULLETLIFESPAN = 5;
+
+var wolfhurt = new Audio(HurtWolf);
 
 class SeedScene extends Scene {
     constructor() {
@@ -153,11 +156,12 @@ class SeedScene extends Scene {
             globals.wolves.forEach(wolf => {
                 if (wolf.hitbox.containsPoint(b.position)){
                     wolf.takeDamage()
-
+                    
                     if (wolf.health <= 0){
                         this.remove(wolf)
                         const index = globals.wolves.indexOf(wolf);
                         globals.wolves.splice(index, 1);
+                        wolfhurt.play()
                     }
                 }
             })

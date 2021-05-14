@@ -11,7 +11,7 @@ import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockCont
 import { SeedScene } from 'scenes';
 import { globals } from './global';
 import { Wolf1} from 'objects';
-import {WolfHowl, Soundtrack, WolfGrowl, Sheepbaa} from './audio'
+import {WolfHowl, Soundtrack, WolfGrowl, Sheepbaa, HurtSheep, Shot} from './audio'
 
 // Clock
 var clock = new Clock();
@@ -44,6 +44,8 @@ var audio = new Audio(Soundtrack);
 var howlaudio = new Audio(WolfHowl);
 var growlaudio = new Audio(WolfGrowl);
 var baa = new Audio(Sheepbaa);
+var sheephurt = new Audio(HurtSheep);
+var shootaudio = new Audio(Shot);
 // audio.play();
 // console.log(audio)
 
@@ -189,6 +191,7 @@ const onClick = function (event) {
     //console.log('shoot');
     if (gameStarted) {
         scene.shootBullet( controls);
+        shootaudio.play()
     }
 }
 document.addEventListener('mousedown', onClick);
@@ -224,6 +227,7 @@ const onAnimationFrameHandler = (timeStamp) => {
 
         if (wolf.hitbox.clone().intersectsBox(globals.sheep.hitbox)){
           globals.sheep.takeDamage();
+          sheephurt.play()
         }
 
         if (globals.sheep.health <= 0){
