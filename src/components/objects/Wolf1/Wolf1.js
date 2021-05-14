@@ -12,6 +12,7 @@ class Wolf1 extends Group {
 
         this.name = 'wolf1';
         this.hitbox = new Box3()
+        this.health = 100
 
         loader.load(MODEL, (gltf) => {
             
@@ -49,9 +50,16 @@ class Wolf1 extends Group {
         this.position.y =  -45;
 
         // Update hitbox
-        this.hitbox.setFromCenterAndSize(this.position, this.scale.clone().multiplyScalar(0.5))
+        this.hitbox.setFromCenterAndSize(this.position, this.scale.clone().multiplyScalar(0.9))
         this.hitbox.min.add(new Vector3(0, 1, 0).multiplyScalar(1.5))
         this.hitbox.max.add(new Vector3(0, 1, 0).multiplyScalar(1.5))
+
+        this.hitbox.min.add(direction.clone().multiplyScalar(25))
+        this.hitbox.max.add(direction.clone().multiplyScalar(25))
+    }
+
+    takeDamage(){
+        this.health -= 10
     }
 }
 
