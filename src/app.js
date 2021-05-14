@@ -12,7 +12,7 @@ import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockCont
 import { SeedScene } from 'scenes';
 import { globals } from './global';
 import { Wolf1} from 'objects';
-
+import {WolfHowl, Soundtrack, WolfGrowl, Sheepbaa} from './audio'
 
 var bins = require.context("../", true, /.*\.bin/);
 var pngs = require.context("../", true, /.*\.png/);
@@ -44,6 +44,13 @@ document.body.style.margin = 0; // Removes margin around page
 document.body.style.overflow = 'hidden'; // Fix scrolling
 document.body.appendChild(canvas);
 
+// Add music and soudn effects
+var audio = new Audio(Soundtrack);
+var howlaudio = new Audio(WolfHowl);
+var growlaudio = new Audio(WolfGrowl);
+var baa = new Audio(Sheepbaa);
+// audio.play();
+// console.log(audio)
 
 //camera.add(globals.gun);
 //globals.gun.position.set(17,-7,8);
@@ -233,7 +240,16 @@ const onAnimationFrameHandler = (timeStamp) => {
       scene.add(newwolf);
       globals.wolves.push(newwolf)
       }
-    
+    }
+
+    if (globals.counter % 1000 === 0){
+      howlaudio.play();
+    }
+    if (globals.counter % 800 === 0){
+      growlaudio.play();
+    }
+    if (globals.counter % 500 === 0){
+      baa.play();
     }
     
     globals.counter += 1;
