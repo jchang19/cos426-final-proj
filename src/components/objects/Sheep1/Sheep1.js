@@ -1,4 +1,4 @@
-import { Group, Vector3, AnimationMixer } from 'three';
+import { Group, Vector3, AnimationMixer, Box3 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import MODEL from './scene.gltf';
 import { globals } from '../../../global';
@@ -11,6 +11,8 @@ class Sheep1 extends Group {
         const loader = new GLTFLoader();
 
         this.name = 'sheep1';
+        this.hitbox = new Box3()
+        this.health = 100;
 
         loader.load(MODEL, (gltf) => {
             
@@ -48,6 +50,13 @@ class Sheep1 extends Group {
         
         direction.applyEuler(this.rotation)
         this.position.add(direction.normalize().multiplyScalar(0.01))
+        this.hitbox.setFromCenterAndSize(this.position, this.scale.clone().multiplyScalar(1))
+        this.hitbox.min.add(new Vector3(0, 1, 0).multiplyScalar(1.5))
+        this.hitbox.max.add(new Vector3(0, 1, 0).multiplyScalar(1.5))
+    }
+
+    takeDamage(){
+        this.health -= 100;
     }
 }
 

@@ -1,4 +1,4 @@
-import { Group, Vector3, AnimationMixer } from 'three';
+import { Group, Vector3, AnimationMixer, Box3 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import MODEL from './scene.gltf';
 import { globals } from '../../../global';
@@ -11,6 +11,8 @@ class Wolf1 extends Group {
         const loader = new GLTFLoader();
 
         this.name = 'wolf1';
+        this.hitbox = new Box3()
+
         loader.load(MODEL, (gltf) => {
             
             var mixer = new AnimationMixer( gltf.scene );
@@ -45,10 +47,11 @@ class Wolf1 extends Group {
 
         this.position.add(direction.normalize().multiplyScalar(0.08));
         this.position.y =  -45;
+
         // Update hitbox
-        // this.hitbox.setFromCenterAndSize(this.position, this.scale.clone().multiplyScalar(0.5))
-        // this.hitbox.min.add(new Vector3(0, 1, 0).multiplyScalar(0.3))
-        // this.hitbox.max.add(new Vector3(0, 1, 0).multiplyScalar(0.3))
+        this.hitbox.setFromCenterAndSize(this.position, this.scale.clone().multiplyScalar(0.5))
+        this.hitbox.min.add(new Vector3(0, 1, 0).multiplyScalar(1.5))
+        this.hitbox.max.add(new Vector3(0, 1, 0).multiplyScalar(1.5))
     }
 }
 

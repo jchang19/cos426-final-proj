@@ -214,15 +214,12 @@ const onAnimationFrameHandler = (timeStamp) => {
     // Move regular birds
     globals.birds.move()
 
-    // Move sheep
-    globals.sheep.move();
-
-    // Temp code to move wolves
-    globals.wolves.forEach((wolf) => { 
-      wolf.move();
-    });
+<<<<<<< HEAD
 
 
+
+=======
+>>>>>>> b5b37bab01a0c010a5db03d584455c92d2e8886b
     // MOVE WOLVES
     if (globals.sheep.health > 0){
 
@@ -231,7 +228,7 @@ const onAnimationFrameHandler = (timeStamp) => {
         wolf.move();
 
         if (wolf.hitbox.clone().intersectsBox(globals.sheep.hitbox)){
-          globals.sheep.takedamage();
+          globals.sheep.takeDamage();
         }
 
         if (globals.sheep.health <= 0){
