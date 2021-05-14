@@ -1,6 +1,6 @@
 import * as Dat from 'dat.gui';
 import { Scene, Color, Vector3, Box3, Box3Helper } from 'three';
-import { Sheep, Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf, Wolf1} from 'objects';
+import { Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf1} from 'objects';
 import * as THREE from 'three';
 import { BasicLights } from 'lights';
 import { globals } from '../../global';
@@ -52,9 +52,14 @@ class SeedScene extends Scene {
         // Add sheep and wolves to scene
         const sheep = new Sheep1(this);
         const wolf = new Wolf1(this);
-        console.log(wolf);
         wolf.scale.multiplyScalar(0.75);
         this.add(sheep, wolf);
+
+          // initialize sheep and wolf global arrays
+          globals.wolves = [];
+          globals.wolves.push(wolf);
+  
+          globals.sheep = sheep;
 
         // Hitbox visualizer
         // const helper = new Box3Helper( sheep.hitbox, 0xffff00 );
@@ -63,11 +68,14 @@ class SeedScene extends Scene {
         // const helper2 = new Box3Helper( wolf.hitbox, 0xffff00 );
         // this.add( helper2 );
 
+<<<<<<< HEAD
         // initialize sheep and wolf global arrays
         globals.wolves.push(wolf);
 
         globals.sheep = sheep;
 
+=======
+>>>>>>> 7ad8fe31e1ec0546e68b27ed85d22e5857546bb9
         // initialize bullets array
         globals.bullets = [];
 
@@ -99,10 +107,7 @@ class SeedScene extends Scene {
 
         globals.bullets.push(bullet);
         this.add(bullet);
-
-        
     }
-
 
     addToUpdateList(object) {
         this.state.updateList.push(object);

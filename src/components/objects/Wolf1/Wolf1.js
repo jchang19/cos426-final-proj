@@ -45,6 +45,11 @@ class Wolf1 extends Group {
 
         this.position.add(direction.normalize().multiplyScalar(0.01));
         this.position.y =  -8.5
+
+        // Update hitbox
+        // this.hitbox.setFromCenterAndSize(this.position, this.scale.clone().multiplyScalar(0.5))
+        // this.hitbox.min.add(new Vector3(0, 1, 0).multiplyScalar(0.3))
+        // this.hitbox.max.add(new Vector3(0, 1, 0).multiplyScalar(0.3))
     }
 }
 

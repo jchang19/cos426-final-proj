@@ -202,19 +202,20 @@ const onAnimationFrameHandler = (timeStamp) => {
     //   globals.wolves.push(newwolf)
     // }
     
-    // MOVE SHEEP
-
-
     // Animate Animals
     var delta = clock.getDelta();
     globals.mixers.forEach((mixer) => {
       if(mixer) mixer.update(delta);
     });
 
+<<<<<<< HEAD
     globals.wolves.forEach((wolf) => {
       wolf.move();
     });
 
+=======
+    // MOVE SHEEP
+>>>>>>> 7ad8fe31e1ec0546e68b27ed85d22e5857546bb9
     globals.sheep.move();
 
     // MOVE WOLVES
