@@ -192,15 +192,6 @@ const onAnimationFrameHandler = (timeStamp) => {
     controlsHandler();
     renderer.render(scene, camera);
     scene.update && scene.update(timeStamp);
-
-
-    // console.log(timeStamp)
-    // Spawn wolf every 5 seconds
-    // if (timeStamp % 5000 === 0){
-    //   var newwolf = new Wolf();
-    //   scene.add(newwolf);
-    //   globals.wolves.push(newwolf)
-    // }
     
     // Animate Animals
     var delta = clock.getDelta();
@@ -214,9 +205,10 @@ const onAnimationFrameHandler = (timeStamp) => {
     // Move regular birds
     globals.birds.move()
 
+    globals.sheep.move()
+
     // MOVE WOLVES
     if (globals.sheep.health > 0){
-
 
       globals.wolves.forEach((wolf) => {
         wolf.move();

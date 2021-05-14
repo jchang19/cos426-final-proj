@@ -68,10 +68,9 @@ class SeedScene extends Scene {
         wolf.scale.multiplyScalar(5);
         this.add(sheep, wolf);
 
-          // initialize sheep and wolf global arrays
+          // initialize sheep and wolf global variables
         globals.wolves = [];
         globals.wolves.push(wolf);
-
         globals.sheep = sheep;
 
         // Hitbox visualizer
