@@ -190,7 +190,7 @@ class SeedScene extends Scene {
         // side 3
         for(let i=0; i<n; i++) {
             let x = this.randomNumber(-300, 0);
-            let z = this.randomNumber(-10, 700);
+            let z = this.randomNumber(-10, 290);
             const cactus = new Cactus(this);
             cactus.scale.multiplyScalar(this.randomNumber(0.3,1));
             cactus.position.set(x, -40,z);
