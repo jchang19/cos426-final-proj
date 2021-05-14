@@ -182,6 +182,7 @@ document.addEventListener('click', function () {
     controls.lock();
 });
 
+
 // shoot event
 const onClick = function (event) {
     //console.log('shoot');
@@ -205,7 +206,6 @@ const onAnimationFrameHandler = (timeStamp) => {
     globals.mixers.forEach((mixer) => {
       if(mixer) mixer.update(delta);
     });
-
     
     // Move Phoenix bird
     //globals.phoenix.move()
@@ -224,6 +224,7 @@ const onAnimationFrameHandler = (timeStamp) => {
         if (wolf.hitbox.clone().intersectsBox(globals.sheep.hitbox)){
           globals.sheep.takeDamage();
           sheephurt.play();
+          updateHealthBar(globals.sheep.health);
         }
 
         if (globals.sheep.health <= 0){
@@ -254,6 +255,21 @@ const onAnimationFrameHandler = (timeStamp) => {
     globals.counter += 1;
     window.requestAnimationFrame(onAnimationFrameHandler);
 };
+
+function updateHealthBar(health) {
+  var flag = true;
+  var element = document.getElementById("health_bar");
+  var num = Math.floor((health/1000)*100);
+  var percentage = num.toString() + "%";
+  element.style.width = percentage;
+  if ((num < 50) && flag) {
+    element.classList.remove("bg-success");
+    element.classList.add("bg-danger");
+  }
+}
+
+
+
 window.requestAnimationFrame(onAnimationFrameHandler);
 
 // Resize Handler
