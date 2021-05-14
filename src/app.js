@@ -207,11 +207,11 @@ const onAnimationFrameHandler = (timeStamp) => {
       if(mixer) mixer.update(delta);
     });
     
-    // Move Phoenix bird
-    //globals.phoenix.move()
+    // update score
+    updateScore(globals.score);
 
     // Move regular birds
-    globals.birds.move()
+    globals.birds.move();
 
     if (gameStarted) {
         globals.sheep.move()
@@ -263,12 +263,24 @@ function updateHealthBar(health) {
   var num = Math.floor((health/1000)*100);
   var percentage = num.toString() + "%";
   element.style.width = percentage;
+  updateSheepHealth(percentage);
   if ((num < 50) && flag) {
     element.classList.remove("bg-success");
     element.classList.add("bg-danger");
   }
 }
 
+function updateScore(score) {
+  var element = document.getElementById("kill_count");
+  var string = "Score:  " +  score.toString();
+  element.innerHTML = string;
+}
+
+function updateSheepHealth(percentage) {
+  var element = document.getElementById("sheep_health1");
+  var string = "Health:  " + percentage;
+  element.innerHTML = string;
+}
 
 
 window.requestAnimationFrame(onAnimationFrameHandler);
