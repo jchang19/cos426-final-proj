@@ -208,29 +208,32 @@ const onAnimationFrameHandler = (timeStamp) => {
       if(mixer) mixer.update(delta);
     });
 
-<<<<<<< HEAD
-    globals.wolves.forEach((wolf) => {
+    globals.sheep.move();
+
+
+    // Temp code to move wolves
+    globals.wolves.forEach((wolf) => { 
       wolf.move();
     });
 
-=======
-    // MOVE SHEEP
->>>>>>> 7ad8fe31e1ec0546e68b27ed85d22e5857546bb9
-    globals.sheep.move();
 
     // MOVE WOLVES
     if (globals.sheep.health > 0){
-      for (let i = 0; i < globals.wolves.length; i ++){
-        globals.wolves[i].move();
-  
-        if (globals.wolves[i].hitbox.clone().intersectsBox(globals.sheep.hitbox)){
+
+
+      globals.wolves.forEach((wolf) => {
+        wolf.move();
+
+        if (wolf.hitbox.clone().intersectsBox(globals.sheep.hitbox)){
           globals.sheep.takedamage();
         }
-  
+
         if (globals.sheep.health <= 0){
           scene.remove(globals.sheep);
         }
-      }
+
+      });
+    
     }
     
     window.requestAnimationFrame(onAnimationFrameHandler);

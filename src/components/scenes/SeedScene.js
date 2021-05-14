@@ -68,14 +68,10 @@ class SeedScene extends Scene {
         // const helper2 = new Box3Helper( wolf.hitbox, 0xffff00 );
         // this.add( helper2 );
 
-<<<<<<< HEAD
         // initialize sheep and wolf global arrays
         globals.wolves.push(wolf);
-
         globals.sheep = sheep;
 
-=======
->>>>>>> 7ad8fe31e1ec0546e68b27ed85d22e5857546bb9
         // initialize bullets array
         globals.bullets = [];
 
