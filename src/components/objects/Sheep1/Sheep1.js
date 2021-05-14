@@ -71,7 +71,7 @@ class Sheep1 extends Group {
     }
 
     takeDamage(){
-        this.health -= 100;
+        this.health -= 5;
     }
 }
 
