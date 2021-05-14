@@ -214,12 +214,6 @@ const onAnimationFrameHandler = (timeStamp) => {
     // Move regular birds
     globals.birds.move()
 
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> b5b37bab01a0c010a5db03d584455c92d2e8886b
     // MOVE WOLVES
     if (globals.sheep.health > 0){
 
