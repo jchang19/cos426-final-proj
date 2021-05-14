@@ -199,6 +199,7 @@ document.addEventListener('click', function () {
     }
 });
 
+
 // shoot event
 const onClick = function (event) {
     //console.log('shoot');
@@ -225,13 +226,12 @@ const onAnimationFrameHandler = (timeStamp) => {
     globals.mixers.forEach((mixer) => {
       if(mixer) mixer.update(delta);
     });
-
     
-    // Move Phoenix bird
-    //globals.phoenix.move()
+    // update score
+    updateScore(globals.score);
 
     // Move regular birds
-    globals.birds.move()
+    globals.birds.move();
 
     if (gameStarted) {
         globals.sheep.move()
@@ -242,10 +242,11 @@ const onAnimationFrameHandler = (timeStamp) => {
           globals.wolves.forEach((wolf) => {
             wolf.move();
 
-            if (wolf.hitbox.clone().intersectsBox(globals.sheep.hitbox)){
-              globals.sheep.takeDamage();
-              sheephurt.play()
-            }
+        if (wolf.hitbox.clone().intersectsBox(globals.sheep.hitbox)){
+          globals.sheep.takeDamage();
+          sheephurt.play();
+          updateHealthBar(globals.sheep.health);
+        }
 
             if (globals.sheep.health <= 0){
               scene.remove(globals.sheep);
@@ -277,6 +278,33 @@ const onAnimationFrameHandler = (timeStamp) => {
     globals.counter += 1;
     window.requestAnimationFrame(onAnimationFrameHandler);
 };
+
+function updateHealthBar(health) {
+  var flag = true;
+  var element = document.getElementById("health_bar");
+  var num = Math.floor((health/1000)*100);
+  var percentage = num.toString() + "%";
+  element.style.width = percentage;
+  updateSheepHealth(percentage);
+  if ((num < 50) && flag) {
+    element.classList.remove("bg-success");
+    element.classList.add("bg-danger");
+  }
+}
+
+function updateScore(score) {
+  var element = document.getElementById("kill_count");
+  var string = "Score:  " +  score.toString();
+  element.innerHTML = string;
+}
+
+function updateSheepHealth(percentage) {
+  var element = document.getElementById("sheep_health1");
+  var string = "Health:  " + percentage;
+  element.innerHTML = string;
+}
+
+
 window.requestAnimationFrame(onAnimationFrameHandler);
 
 // Resize Handler

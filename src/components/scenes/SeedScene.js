@@ -109,8 +109,8 @@ class SeedScene extends Scene {
         var max = new Vector3(200, -7, 200);
         const box = new Box3(min, max);
         globals.arena = box;
-        const helper = new Box3Helper( box, 0xFF0000 );
-        this.add(helper, lights);
+        //const helper = new Box3Helper( box, 0xFF0000 );
+        this.add(box, lights);
     }
 
     shootBullet(controls) {
