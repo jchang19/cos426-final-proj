@@ -1,6 +1,6 @@
 import * as Dat from 'dat.gui';
 import { Scene, Color, Vector3, Box3, Box3Helper } from 'three';
-import { Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf1, Phoenix, Birds} from 'objects';
+import { Sheep1, Desert, Bordered_Mountains, S_Mountains, Gun, Cowboy, Ball, Wolf1, Phoenix, Birds, Barn, Cactus} from 'objects';
 import * as THREE from 'three';
 import { BasicLights } from 'lights';
 import { globals } from '../../global';
@@ -62,13 +62,26 @@ class SeedScene extends Scene {
         this.add(birds, lights);
         globals.birds = birds;
 
+        // Add Barn 
+        const barn = new Barn(this);
+        barn.scale.multiplyScalar(0.05);
+        barn.position.set(300, -45,0);
+        barn.rotation.y = Math.PI;
+        this.add(barn, lights);
+        
+
+        // add Multiple Cacti
+        this.addCacti(this, lights);
+
+
+
         // Add sheep and wolves to scene
         const sheep = new Sheep1(this);
         const wolf = new Wolf1(this);
         wolf.scale.multiplyScalar(5);
         this.add(sheep, wolf);
 
-          // initialize sheep and wolf global arrays
+        // initialize sheep and wolf global arrays
         globals.wolves = [];
         globals.wolves.push(wolf);
 
@@ -137,25 +150,57 @@ class SeedScene extends Scene {
         }
     }
 
-    // function to return the map object given its corresponding id
-    mapObjectFromId(mapId) {
-        var newMap = null;
-        if (mapId == '1') {
-            newMap = new Bordered_Mountains(this);
-            newMap.position.set(0,0,0);
-        }
-        else if (mapId == '2') {
-            
-            newMap.position.set(0,0,0);
-        }
-        else if (mapId == '3') {
-            
-            newMap.position.set(0,0,0);
+    addCacti(scene, lights) {
+        var n = 15;
+
+        // randomly add cacti around four sides of the box
+        
+        // side 1
+        for(let i=0; i<n; i++) {
+            let x = this.randomNumber( 30, 300);
+            let z = this.randomNumber(205, 500);
+            const cactus = new Cactus(this);
+            cactus.scale.multiplyScalar(this.randomNumber(0.3,1));
+            cactus.position.set(x, -55,z);
+            scene.add(cactus, lights);
         }
 
-        return newMap;
+        // side 2
+        for(let i=0; i<n; i++) {
+            let x = this.randomNumber( 205, 500);
+            let z = this.randomNumber(100, 205);
+            const cactus = new Cactus(this);
+            cactus.scale.multiplyScalar(this.randomNumber(0.3,1));
+            cactus.position.set(x, -55,z);
+            scene.add(cactus, lights);
+        }
+
+        // side 3
+        for(let i=0; i<n; i++) {
+            let x = this.randomNumber(-300, 0);
+            let z = this.randomNumber(-10, 700);
+            const cactus = new Cactus(this);
+            cactus.scale.multiplyScalar(this.randomNumber(0.3,1));
+            cactus.position.set(x, -40,z);
+            scene.add(cactus, lights);
+        }
+
+        // side 4
+        for(let i=0; i<n; i++) {
+            let x = this.randomNumber(30, 200);
+            let z = this.randomNumber(-270, 30);
+            const cactus = new Cactus(this);
+            cactus.scale.multiplyScalar(this.randomNumber(0.3,1));
+            cactus.position.set(x, -40,z);
+            scene.add(cactus, lights);
+        }
 
     }
+
+    randomNumber(min, max) {
+        return (Math.random() * (max - min) + min);
+    }
+
 }
 
 export default SeedScene;

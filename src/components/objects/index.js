@@ -10,3 +10,5 @@ export * from './Wolf1';
 export * from './Sheep1';
 export * from './Phoenix';
 export * from './Birds';
+export * from './Barn';
+export * from './Cactus';

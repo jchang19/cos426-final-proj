@@ -29,12 +29,12 @@ class Birds extends Group {
         var y = this.position.y;
         var z = this.position.z;
         
-        if (y < 400 ) {
-            this.position.y += 0.2;
+        if (y < 100 ) {
+            this.position.y += 0.1;
         }
 
-        if (z<-1000) {
-            this.position.set(300, 0,1000);
+        if (z<1000) {
+            this.position.set(300,100,1000);
         }
 
         var direction = new Vector3(0,0,-1);
