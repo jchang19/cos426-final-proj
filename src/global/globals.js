@@ -10,4 +10,5 @@ export default{
     arena: null,
     counter : 0,
     pointer:null,
+    score: 0,
 };

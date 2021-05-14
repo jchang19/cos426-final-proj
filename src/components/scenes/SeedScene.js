@@ -163,6 +163,7 @@ class SeedScene extends Scene {
                         const index = globals.wolves.indexOf(wolf);
                         globals.wolves.splice(index, 1);
                         wolfhurt.play()
+                        globals.score += 100
                     }
                 }
             })
