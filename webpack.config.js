@@ -9,6 +9,7 @@ module.exports = {
         path: path.join(__dirname, buildPath),
         filename: '[name].[hash].js',
         publicPath: `/${pkg.repository}/`,
+        // sourceMapFilename: "[name].[hash].js.map"
     },
     target: 'web',
     devtool: 'source-map',
@@ -23,7 +24,7 @@ module.exports = {
                 exclude: path.resolve(__dirname, './node_modules/'),
             },
             {
-                test: /\.(jpe?g|gif|svg|tga|gltf|babylon|mtl|pcb|pcd|prwm|obj|mat|mp3|ogg)$/i,
+              test: /\.(gif|svg|gltf|tga|babylon|mtl|pcb|pcd|prwm|obj|mat|mp3|ogg)$/i,
                 use: 'file-loader',
                 exclude: path.resolve(__dirname, './node_modules/'),
             },
@@ -43,7 +44,7 @@ module.exports = {
                 ],
             },
             { 
-                test: /\.(bin|png)$/i,
+              test: /\.(png|jpg|jpeg|bin)$/i,
                 loader: 'file-loader',
                 options: {
                     name: '[name].[ext]',

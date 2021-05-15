@@ -13,6 +13,11 @@ import { globals } from './global';
 import { Wolf1} from 'objects';
 import {WolfHowl, Soundtrack, WolfGrowl, Sheepbaa, HurtSheep, Shot} from './audio'
 
+var bins = require.context("../", true, /.*\.bin/);
+var pngs = require.context("../", true, /.*\.png/);
+var jpgs = require.context("../", true, /.*\.jpg/);
+var jpegs = require.context("../", true, /.*\.jpeg/);
+
 // Clock
 var clock = new Clock();
 

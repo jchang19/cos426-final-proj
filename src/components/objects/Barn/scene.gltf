@@ -2461,115 +2461,115 @@
   ],
   "images": [
     {
-      "uri": "textures/Ladder_3__0_baseColor.png"
+      "uri": "Ladder_3__0_baseColor.png"
     },
     {
-      "uri": "textures/Ladder_3__0_metallicRoughness.png"
+      "uri": "Ladder_3__0_metallicRoughness.png"
     },
     {
-      "uri": "textures/Ladder_3__0_normal.png"
+      "uri": "Ladder_3__0_normal.png"
     },
     {
-      "uri": "textures/Cylinder_baseColor.png"
+      "uri": "Cylinder_baseColor.png"
     },
     {
-      "uri": "textures/silo_baseColor.png"
+      "uri": "silo_baseColor.png"
     },
     {
-      "uri": "textures/silo_metallicRoughness.png"
+      "uri": "silo_metallicRoughness.png"
     },
     {
-      "uri": "textures/silo_normal.png"
+      "uri": "silo_normal.png"
     },
     {
-      "uri": "textures/lamp_baseColor.png"
+      "uri": "lamp_baseColor.png"
     },
     {
-      "uri": "textures/lamp_metallicRoughness.png"
+      "uri": "lamp_metallicRoughness.png"
     },
     {
-      "uri": "textures/lamp_normal.png"
+      "uri": "lamp_normal.png"
     },
     {
-      "uri": "textures/floor_baseColor.png"
+      "uri": "floor_baseColor.png"
     },
     {
-      "uri": "textures/floor_metallicRoughness.png"
+      "uri": "floor_metallicRoughness.png"
     },
     {
-      "uri": "textures/floor_normal.png"
+      "uri": "floor_normal.png"
     },
     {
-      "uri": "textures/rafter_baseColor.png"
+      "uri": "rafter_baseColor.png"
     },
     {
-      "uri": "textures/rafter_metallicRoughness.png"
+      "uri": "rafter_metallicRoughness.png"
     },
     {
-      "uri": "textures/rafter_normal.png"
+      "uri": "rafter_normal.png"
     },
     {
-      "uri": "textures/roof_baseColor.png"
+      "uri": "roof_baseColor.png"
     },
     {
-      "uri": "textures/roof_metallicRoughness.png"
+      "uri": "roof_metallicRoughness.png"
     },
     {
-      "uri": "textures/roof_normal.png"
+      "uri": "roof_normal.png"
     },
     {
-      "uri": "textures/material_baseColor.png"
+      "uri": "material_baseColor.png"
     },
     {
-      "uri": "textures/material_metallicRoughness.png"
+      "uri": "material_metallicRoughness.png"
     },
     {
-      "uri": "textures/material_normal.png"
+      "uri": "material_normal.png"
     },
     {
-      "uri": "textures/regular_baseColor.png"
+      "uri": "regular_baseColor.png"
     },
     {
-      "uri": "textures/regular_metallicRoughness.png"
+      "uri": "regular_metallicRoughness.png"
     },
     {
-      "uri": "textures/regular_normal.png"
+      "uri": "regular_normal.png"
     },
     {
-      "uri": "textures/door_baseColor.png"
+      "uri": "door_baseColor.png"
     },
     {
-      "uri": "textures/door_metallicRoughness.png"
+      "uri": "door_metallicRoughness.png"
     },
     {
-      "uri": "textures/door_normal.png"
+      "uri": "door_normal.png"
     },
     {
-      "uri": "textures/window_baseColor.png"
+      "uri": "window_baseColor.png"
     },
     {
-      "uri": "textures/window_metallicRoughness.png"
+      "uri": "window_metallicRoughness.png"
     },
     {
-      "uri": "textures/window_normal.png"
+      "uri": "window_normal.png"
     },
     {
-      "uri": "textures/door_wall_baseColor.png"
+      "uri": "door_wall_baseColor.png"
     },
     {
-      "uri": "textures/door_wall_metallicRoughness.png"
+      "uri": "door_wall_metallicRoughness.png"
     },
     {
-      "uri": "textures/door_wall_normal.png"
+      "uri": "door_wall_normal.png"
     },
     {
-      "uri": "textures/windmill_baseColor.png"
+      "uri": "windmill_baseColor.png"
     },
     {
-      "uri": "textures/windmill_metallicRoughness.png"
+      "uri": "windmill_metallicRoughness.png"
     },
     {
-      "uri": "textures/windmill_normal.png"
+      "uri": "windmill_normal.png"
     }
   ],
   "materials": [
