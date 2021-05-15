@@ -39713,31 +39713,31 @@
   ],
   "images": [
     {
-      "uri": "/Bark_Frond_Mat_baseColor.png"
+      "uri": "Bark_Frond_Mat_baseColor.png"
     },
     {
-      "uri": "/Bark_Frond_Mat_normal.png"
+      "uri": "Bark_Frond_Mat_normal.png"
     },
     {
-      "uri": "/Bush_Mediteranean_Frond_Mat_baseColor.png"
+      "uri": "Bush_Mediteranean_Frond_Mat_baseColor.png"
     },
     {
-      "uri": "/Bush_Mediteranean_Frond_Mat_normal.png"
+      "uri": "Bush_Mediteranean_Frond_Mat_normal.png"
     },
     {
-      "uri": "/Mat.3_baseColor.jpeg"
+      "uri": "Mat.3_baseColor.jpeg"
     },
     {
-      "uri": "/Mat.3_normal.png"
+      "uri": "Mat.3_normal.png"
     },
     {
-      "uri": "/Mat.4_baseColor.jpeg"
+      "uri": "Mat.4_baseColor.jpeg"
     },
     {
-      "uri": "/Mat.4_normal.png"
+      "uri": "Mat.4_normal.png"
     },
     {
-      "uri": "/material_baseColor.jpeg"
+      "uri": "material_baseColor.jpeg"
     }
   ],
   "materials": [
