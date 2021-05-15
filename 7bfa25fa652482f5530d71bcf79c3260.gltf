@@ -11594,16 +11594,16 @@
   ],
   "images": [
     {
-      "uri": "textures/MatI_Ride_FengHuang_01a_baseColor.png"
+      "uri": "MatI_Ride_FengHuang_01a_baseColor.png"
     },
     {
-      "uri": "textures/MatI_Ride_FengHuang_01a_emissive.png"
+      "uri": "MatI_Ride_FengHuang_01a_emissive.png"
     },
     {
-      "uri": "textures/MatI_Ride_FengHuang_01b_baseColor.png"
+      "uri": "MatI_Ride_FengHuang_01b_baseColor.png"
     },
     {
-      "uri": "textures/MatI_Ride_FengHuang_01b_emissive.png"
+      "uri": "MatI_Ride_FengHuang_01b_emissive.png"
     }
   ],
   "materials": [

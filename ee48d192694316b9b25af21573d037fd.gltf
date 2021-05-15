@@ -10768,10 +10768,10 @@
   ],
   "images": [
     {
-      "uri": "textures/Sheep_baseColor.png"
+      "uri": "Sheep_baseColor.png"
     },
     {
-      "uri": "textures/Sheep_metallicRoughness.png"
+      "uri": "Sheep_metallicRoughness.png"
     }
   ],
   "materials": [
